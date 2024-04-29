@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "846859021926",
+    "project_id": "cricupdate-3d464",
+    "storage_bucket": "cricupdate-3d464.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846859021926:android:410edc2e4c598de3cdc7a7",
+        "android_client_info": {
+          "package_name": "com.cric.update"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846859021926-ohfgp9iiidor02n00kel3r13olb9v3lr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwnGjcLFrmXI7XyTzXB_ivsj_WdO2M3gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846859021926-ohfgp9iiidor02n00kel3r13olb9v3lr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "846859021926-20b46hd4i6d17jhpp7l4lrggfsr3238r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.developers.cricupdate.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
