@@ -1,6 +1,8 @@
 import 'package:cricupdate/data/model/response/commentary_page.dart';
 import 'package:cricupdate/data/model/response/competition_page.dart';
 import 'package:cricupdate/data/model/response/live_matchh_detail_page.dart';
+import 'package:cricupdate/data/model/response/match_info_page.dart';
+import 'package:cricupdate/data/model/response/match_odds_page.dart';
 import 'package:cricupdate/data/model/response/matchh_page.dart';
 import 'package:cricupdate/data/model/response/player_page.dart';
 import 'package:cricupdate/data/model/response/player_stats_page.dart';
@@ -26,7 +28,10 @@ class AllMatchesController extends GetxController implements GetxService {
   List<Match> competitionMatchList = [];
   TeamPage? teamPage;
   List<TeamModel> teamList = [];
-
+  MatchInfoPage? matchInfoPage;
+  MatchInfoModel? matchInfoModel;
+  MatchOddsPage? matchOddsPage;
+  MatchOddsModel? matchOddsModel;
   List<Match> upcomingMatchList = [];
   List<Match> completeMatchList = [];
   List<Match> liveMatchList = [];
@@ -134,37 +139,19 @@ class AllMatchesController extends GetxController implements GetxService {
     required String token,
     required int matchId,
   }) async {
+    matchInfoPage = null;
+    matchInfoModel = null;
     isLoading = true;
     final response = await http.get(Uri.parse(
         "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/info?token=$token"));
 
     if (response.statusCode == 200) {
       isLoading = false;
-    } else {
-      isLoading = false;
-      throw Exception('Failed to load cricket data');
-    }
-    update();
-  }
+      matchInfoPage = matchInfoPageFromJson(response.body);
 
-  Future<void> getLiveMatchDetails({
-    required String token,
-    required int matchId,
-  }) async {
-    liveMatchDetailsPage = null;
-    liveMatchDetailModel = null;
-    isLoading = true;
-    final response = await http.get(Uri.parse(
-        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/live?token=$token"));
-    print(
-        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/live?token=$token");
-    if (response.statusCode == 200) {
-      isLoading = false;
-      liveMatchDetailsPage = liveMatchDetailsPageFromJson(response.body);
-
-      if (liveMatchDetailsPage != null) {
-        if (liveMatchDetailsPage!.response != null) {
-          liveMatchDetailModel = liveMatchDetailsPage!.response;
+      if (matchInfoPage != null) {
+        if (matchInfoPage!.response != null) {
+          matchInfoModel = matchInfoPage!.response;
         }
       }
     } else {
@@ -174,55 +161,23 @@ class AllMatchesController extends GetxController implements GetxService {
     update();
   }
 
-  Future<void> getScoreboardDetails({
+  Future<void> getMatchOdds({
     required String token,
     required int matchId,
   }) async {
-    scoreboardDetailPage = null;
-    scoreboardDetailsModel = null;
+    matchOddsPage = null;
+    matchOddsModel = null;
     isLoading = true;
     final response = await http.get(Uri.parse(
-        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/scorecard?token=$token"));
-    print(
-        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/scorecard?token=$token");
+        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/odds?token=$token"));
 
     if (response.statusCode == 200) {
       isLoading = false;
-      scoreboardDetailPage = scoreboardDetailPageFromJson(response.body);
+      matchOddsPage = matchOddsPageFromJson(response.body);
 
-      if (scoreboardDetailPage != null) {
-        if (scoreboardDetailPage!.response != null) {
-          scoreboardDetailsModel = scoreboardDetailPage!.response;
-        }
-      }
-    } else {
-      isLoading = false;
-      throw Exception('Failed to load cricket data');
-    }
-    update();
-  }
-
-  Future<void> getTeamSquads({
-    required String token,
-    required int matchId,
-  }) async {
-    teamSquadPage = null;
-    teamSquadModel = null;
-    isLoading = true;
-    final response = await http.get(Uri.parse(
-        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/squads?token=$token"));
-    if (kDebugMode) {
-      print(
-          "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}$matchId/squads?token=$token");
-    }
-
-    if (response.statusCode == 200) {
-      isLoading = false;
-      teamSquadPage = teamSquadPageFromJson(response.body);
-
-      if (teamSquadPage != null) {
-        if (teamSquadPage!.response != null) {
-          teamSquadModel = teamSquadPage!.response;
+      if (matchOddsPage != null) {
+        if (matchOddsPage!.response != null) {
+          matchOddsModel = matchOddsPage!.response;
         }
       }
     } else {

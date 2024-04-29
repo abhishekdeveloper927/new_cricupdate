@@ -36,7 +36,8 @@ class _SplashScreen extends State<SplashScreen>
   }
 
   Future<void> data() async {
-    await Get.find<AuthController>().authToken();
+    /*
+    await Get.find<AuthController>().authToken();*/
     await Get.find<AuthController>().getProfile();
     await Get.find<AuthController>().getConfigData();
   }

@@ -235,10 +235,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return authController.isLoading
                       ? const Loader()
                       : Button(
-                      title: "Sign Up",
-                      onTap: () {
-                        submit();
-                      });
+                          title: "Sign Up",
+                          onTap: () {
+                            submit();
+                          });
                 }),
                 const SizedBox(
                   height: Dimensions.paddingSizeDefault,
@@ -284,21 +284,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void submit() {
-    if (nameController.text
-        .trim()
-        .isNotEmpty) {
-      if (numberController.text
-          .trim()
-          .isNotEmpty) {
-        if (emailController.text
-            .trim()
-            .isNotEmpty) {
-          if (passwordController.text
-              .trim()
-              .isNotEmpty) {
-            if (confirmPasswordController.text
-                .trim()
-                .isNotEmpty) {
+    if (nameController.text.trim().isNotEmpty) {
+      if (numberController.text.trim().isNotEmpty) {
+        if (emailController.text.trim().isNotEmpty) {
+          if (passwordController.text.trim().isNotEmpty) {
+            if (confirmPasswordController.text.trim().isNotEmpty) {
               if (passwordController.text == confirmPasswordController.text) {
                 RegisterBody registerBody = RegisterBody(
                     name: nameController.text.trim(),
@@ -308,7 +298,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 Get.find<AuthController>().register(registerBody).then((value) {
                   if (value.status) {
-                    Get.find<AuthController>().authToken();
+                    /*
+                    Get.find<AuthController>().authToken();*/
                     Get.offAll(() => const DashboardScreen());
                   }
                 });

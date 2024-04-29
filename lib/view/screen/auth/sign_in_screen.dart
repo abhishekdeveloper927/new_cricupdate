@@ -183,7 +183,8 @@ class _SignInScreenState extends State<SignInScreen> {
         );
         Get.find<AuthController>().login(loginBody).then((value) async {
           if (value.status) {
-           await Get.find<AuthController>().authToken();
+            /*
+           await Get.find<AuthController>().authToken();*/
             Get.offAll(() => const DashboardScreen());
           }
         });

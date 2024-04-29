@@ -28,7 +28,7 @@ class AuthController extends GetxController implements GetxService {
   int selectedIndex = 0;
   int selectedJob = 0;
   String newMessage = '';
-  String? entityToken;
+  String entityToken = "872632cd15b00f3cee02c27d141ac117";
   AuthModel? authModel;
   int selectedTime = 0;
   UserModel? userModel;
@@ -76,7 +76,6 @@ class AuthController extends GetxController implements GetxService {
     update();
     Response response = await authRepo.winningPrediction(winningPredictionBody);
     ResponseModel responseModel = await checkResponseModel(response);
-    showCustomSnackBar(responseModel.message, isError: !responseModel.status);
     log(jsonEncode(response.statusCode));
     if (responseModel.status) {
       winningPredictionModel =
@@ -118,7 +117,7 @@ class AuthController extends GetxController implements GetxService {
     update();
     return responseModel;
   }*/
-
+/*
   Future<void> authToken() async {
     isLoading = true;
     final response = await http.post(
@@ -141,7 +140,7 @@ class AuthController extends GetxController implements GetxService {
       throw Exception('Failed to load cricket data');
     }
     update();
-  }
+  }*/
 
   Future<ResponseModel> getProfile() async {
     userModel = null;

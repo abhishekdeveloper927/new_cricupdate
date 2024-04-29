@@ -33,8 +33,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
   }
 
   Future<void> loadData() async {
-    await Get.find<AllMatchesController>().getScoreboardDetails(
-        token: Get.find<AuthController>().entityToken!,
+    await Get.find<AllMatchesController>().getMatchDetails(
+        token: Get.find<AuthController>().entityToken,
         matchId: widget.matchModel.matchId!);
   }
 
@@ -61,7 +61,18 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
             if (matchesController.isLoading) {
               return const Loader();
             }
-            if (matchesController.scoreboardDetailsModel == null) {
+            if (matchesController.matchInfoModel == null) {
+              return Center(
+                child: Text(
+                  "No data found",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.fontSizeLarge),
+                ),
+              );
+            }
+            if (matchesController.matchInfoModel!.scorecard == null) {
               return Center(
                 child: Text(
                   "No data found",
@@ -105,12 +116,12 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                     const SizedBox(
                       height: Dimensions.paddingSizeDefault,
                     ),
-                    matchesController.scoreboardDetailsModel!.innings != null
+                    matchesController.matchInfoModel!.scorecard!.innings != null
                         ? ListView.builder(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: matchesController
-                                .scoreboardDetailsModel!.innings!.length,
+                                .matchInfoModel!.scorecard!.innings!.length,
                             itemBuilder: (context, index) {
                               return Container(
                                 margin: const EdgeInsets.only(
@@ -123,7 +134,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                   iconColor: Colors.black,
                                   collapsedIconColor: Colors.black,
                                   leading: Text(
-                                    matchesController.scoreboardDetailsModel!
+                                    matchesController.matchInfoModel!.scorecard!
                                             .innings![index].shortName ??
                                         "",
                                     style: TextStyle(
@@ -132,7 +143,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                         fontSize: Dimensions.fontSizeDefault),
                                   ),
                                   title: Text(
-                                    matchesController.scoreboardDetailsModel!
+                                    matchesController.matchInfoModel!.scorecard!
                                             .innings![index].scoresFull ??
                                         "",
                                     style: TextStyle(
@@ -224,7 +235,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                           height: Dimensions.paddingSizeDefault,
                                         ),
                                         matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .batsmen !=
                                                 null
@@ -236,7 +248,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 itemCount: matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .batsmen!
                                                     .length,
@@ -247,123 +260,151 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         .only(
                                                         bottom: Dimensions
                                                             .paddingSizeDefault),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            matchesController
-                                                                    .scoreboardDetailsModel!
-                                                                    .innings![
-                                                                        index]
-                                                                    .batsmen![
-                                                                        battingIndex]
-                                                                    .name ??
-                                                                "",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.blue,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: Dimensions
-                                                                    .fontSizeDefault),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 30,
-                                                          child: Center(
-                                                            child: Text(
-                                                              matchesController
-                                                                  .scoreboardDetailsModel!
-                                                                  .innings![
-                                                                      index]
-                                                                  .batsmen![
-                                                                      battingIndex]
-                                                                  .runs
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      Dimensions
-                                                                          .fontSizeDefault),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Text(
+                                                                matchesController
+                                                                        .matchInfoModel!
+                                                                        .scorecard!
+                                                                        .innings![
+                                                                            index]
+                                                                        .batsmen![
+                                                                            battingIndex]
+                                                                        .name ??
+                                                                    "",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .blue,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .fontSizeDefault),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 30,
-                                                          child: Center(
-                                                            child: Text(
-                                                              matchesController
-                                                                  .scoreboardDetailsModel!
-                                                                  .innings![
-                                                                      index]
-                                                                  .batsmen![
-                                                                      battingIndex]
-                                                                  .ballsFaced
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      Dimensions
-                                                                          .fontSizeDefault),
+                                                            SizedBox(
+                                                              width: 30,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  matchesController
+                                                                      .matchInfoModel!
+                                                                      .scorecard!
+                                                                      .innings![
+                                                                          index]
+                                                                      .batsmen![
+                                                                          battingIndex]
+                                                                      .runs
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeDefault),
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 30,
-                                                          child: Center(
-                                                            child: Text(
-                                                              matchesController
-                                                                  .scoreboardDetailsModel!
-                                                                  .innings![
-                                                                      index]
-                                                                  .batsmen![
-                                                                      battingIndex]
-                                                                  .fours
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      Dimensions
-                                                                          .fontSizeDefault),
+                                                            const SizedBox(
+                                                              width: 10,
                                                             ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 30,
-                                                          child: Center(
-                                                            child: Text(
-                                                              matchesController
-                                                                  .scoreboardDetailsModel!
-                                                                  .innings![
-                                                                      index]
-                                                                  .batsmen![
-                                                                      battingIndex]
-                                                                  .sixes
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      Dimensions
-                                                                          .fontSizeDefault),
+                                                            SizedBox(
+                                                              width: 30,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  matchesController
+                                                                      .matchInfoModel!
+                                                                      .scorecard!
+                                                                      .innings![
+                                                                          index]
+                                                                      .batsmen![
+                                                                          battingIndex]
+                                                                      .ballsFaced
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeDefault),
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 30,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  matchesController
+                                                                      .matchInfoModel!
+                                                                      .scorecard!
+                                                                      .innings![
+                                                                          index]
+                                                                      .batsmen![
+                                                                          battingIndex]
+                                                                      .fours
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeDefault),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 30,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  matchesController
+                                                                      .matchInfoModel!
+                                                                      .scorecard!
+                                                                      .innings![
+                                                                          index]
+                                                                      .batsmen![
+                                                                          battingIndex]
+                                                                      .sixes
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeDefault),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Text(
+                                                          matchesController
+                                                              .matchInfoModel!
+                                                              .scorecard!
+                                                              .innings![index]
+                                                              .batsmen![
+                                                                  battingIndex]
+                                                              .howOut
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: Dimensions
+                                                                  .fontSizeSmall),
                                                         ),
                                                       ],
                                                     ),
@@ -380,7 +421,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                           height: Dimensions.paddingSizeSmall,
                                         ),
                                         matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .extraRuns !=
                                                 null
@@ -405,7 +447,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                     ),
                                                     Text(
                                                       matchesController
-                                                          .scoreboardDetailsModel!
+                                                          .matchInfoModel!
+                                                          .scorecard!
                                                           .innings![index]
                                                           .extraRuns!
                                                           .total
@@ -421,7 +464,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       width: 6,
                                                     ),
                                                     Text(
-                                                      "b ${matchesController.scoreboardDetailsModel!.innings![index].extraRuns!.byes}, ",
+                                                      "b ${matchesController.matchInfoModel!.scorecard!.innings![index].extraRuns!.byes}, ",
                                                       style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: Dimensions
@@ -432,7 +475,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       width: 6,
                                                     ),
                                                     Text(
-                                                      "lb ${matchesController.scoreboardDetailsModel!.innings![index].extraRuns!.legbyes}, ",
+                                                      "lb ${matchesController.matchInfoModel!.scorecard!.innings![index].extraRuns!.legbyes}, ",
                                                       style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: Dimensions
@@ -443,7 +486,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       width: 6,
                                                     ),
                                                     Text(
-                                                      "w ${matchesController.scoreboardDetailsModel!.innings![index].extraRuns!.wides}, ",
+                                                      "w ${matchesController.matchInfoModel!.scorecard!.innings![index].extraRuns!.wides}, ",
                                                       style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: Dimensions
@@ -454,7 +497,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       width: 6,
                                                     ),
                                                     Text(
-                                                      "nb ${matchesController.scoreboardDetailsModel!.innings![index].extraRuns!.noballs}, ",
+                                                      "nb ${matchesController.matchInfoModel!.scorecard!.innings![index].extraRuns!.noballs}, ",
                                                       style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: Dimensions
@@ -465,7 +508,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       width: 6,
                                                     ),
                                                     Text(
-                                                      "p ${matchesController.scoreboardDetailsModel!.innings![index].extraRuns!.penalty}",
+                                                      "p ${matchesController.matchInfoModel!.scorecard!.innings![index].extraRuns!.penalty}",
                                                       style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: Dimensions
@@ -513,7 +556,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                   Dimensions.paddingSizeSmall,
                                             ),
                                             matchesController
-                                                        .scoreboardDetailsModel!
+                                                        .matchInfoModel!
+                                                        .scorecard!
                                                         .innings![index]
                                                         .didNotBat !=
                                                     null
@@ -531,11 +575,13 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                           WrapAlignment.start,
                                                       runAlignment:
                                                           WrapAlignment.start,
-                                                      children: matchesController
-                                                          .scoreboardDetailsModel!
-                                                          .innings![index]
-                                                          .didNotBat!
-                                                          .map((e) {
+                                                      children:
+                                                          matchesController
+                                                              .matchInfoModel!
+                                                              .scorecard!
+                                                              .innings![index]
+                                                              .didNotBat!
+                                                              .map((e) {
                                                         return Text(
                                                           "${e.name ?? ""} , ",
                                                           style: TextStyle(
@@ -616,19 +662,22 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                           height: Dimensions.paddingSizeDefault,
                                         ),
                                         matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .bowlers !=
                                                 null
                                             ? ListView.builder(
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets
+                                                    .symmetric(
                                                     horizontal: Dimensions
                                                         .paddingSizeDefault),
                                                 shrinkWrap: true,
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 itemCount: matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .bowlers!
                                                     .length,
@@ -647,7 +696,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         Expanded(
                                                           child: Text(
                                                             matchesController
-                                                                    .scoreboardDetailsModel!
+                                                                    .matchInfoModel!
+                                                                    .scorecard!
                                                                     .innings![
                                                                         index]
                                                                     .bowlers![
@@ -666,7 +716,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         ),
                                                         Text(
                                                           matchesController
-                                                              .scoreboardDetailsModel!
+                                                              .matchInfoModel!
+                                                              .scorecard!
                                                               .innings![index]
                                                               .bowlers![
                                                                   bowlingIndex]
@@ -683,7 +734,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         ),
                                                         Text(
                                                           matchesController
-                                                              .scoreboardDetailsModel!
+                                                              .matchInfoModel!
+                                                              .scorecard!
                                                               .innings![index]
                                                               .bowlers![
                                                                   bowlingIndex]
@@ -700,7 +752,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         ),
                                                         Text(
                                                           matchesController
-                                                              .scoreboardDetailsModel!
+                                                              .matchInfoModel!
+                                                              .scorecard!
                                                               .innings![index]
                                                               .bowlers![
                                                                   bowlingIndex]
@@ -717,7 +770,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         ),
                                                         Text(
                                                           matchesController
-                                                              .scoreboardDetailsModel!
+                                                              .matchInfoModel!
+                                                              .scorecard!
                                                               .innings![index]
                                                               .bowlers![
                                                                   bowlingIndex]
@@ -782,7 +836,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                           height: Dimensions.paddingSizeDefault,
                                         ),
                                         matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .fows !=
                                                 null
@@ -795,7 +850,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 itemCount: matchesController
-                                                    .scoreboardDetailsModel!
+                                                    .matchInfoModel!
+                                                    .scorecard!
                                                     .innings![index]
                                                     .fows!
                                                     .length,
@@ -814,7 +870,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                         Expanded(
                                                           child: Text(
                                                             matchesController
-                                                                    .scoreboardDetailsModel!
+                                                                    .matchInfoModel!
+                                                                    .scorecard!
                                                                     .innings![
                                                                         index]
                                                                     .fows![
@@ -835,7 +892,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                           width: 60,
                                                           child: Center(
                                                             child: Text(
-                                                              "${matchesController.scoreboardDetailsModel!.innings![index].fows![wicketIndex].scoreAtDismissal}-${matchesController.scoreboardDetailsModel!.innings![index].fows![wicketIndex].number}",
+                                                              "${matchesController.matchInfoModel!.scorecard!.innings![index].fows![wicketIndex].scoreAtDismissal}-${matchesController.matchInfoModel!.scorecard!.innings![index].fows![wicketIndex].number}",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -853,7 +910,8 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                           child: Center(
                                                             child: Text(
                                                               matchesController
-                                                                  .scoreboardDetailsModel!
+                                                                  .matchInfoModel!
+                                                                  .scorecard!
                                                                   .innings![
                                                                       index]
                                                                   .fows![

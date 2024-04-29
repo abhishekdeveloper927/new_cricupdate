@@ -102,10 +102,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       radius: 12,
                       title: "Get Started",
                       onTap: () async {
-                        Get.find<AuthController>()
-                            .authRepo
-                            .saveUserToken(AppConstants.token);
-                        await Get.find<AuthController>().authToken();
+                        Get.find<AuthController>().authRepo.saveUserToken(
+                            AppConstants
+                                .token); /*
+                        await Get.find<AuthController>().authToken();*/
 
                         await Get.find<AuthController>().updateFcmToken(
                             fcmToken: message!, deviceId: android!.id);

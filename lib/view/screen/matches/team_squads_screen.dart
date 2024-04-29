@@ -33,8 +33,8 @@ class _TeamSquadsScreenState extends State<TeamSquadsScreen> {
   }
 
   Future<void> loadData() async {
-    await Get.find<AllMatchesController>().getTeamSquads(
-        token: Get.find<AuthController>().entityToken!,
+    await Get.find<AllMatchesController>().getMatchDetails(
+        token: Get.find<AuthController>().entityToken,
         matchId: widget.matchModel.matchId!);
   }
 
@@ -51,7 +51,18 @@ class _TeamSquadsScreenState extends State<TeamSquadsScreen> {
       if (matchesController.isLoading) {
         return const Loader();
       }
-      if (matchesController.teamSquadModel == null) {
+      if (matchesController.matchInfoModel == null) {
+        return Center(
+          child: Text(
+            "No data found ",
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: Dimensions.fontSizeLarge),
+          ),
+        );
+      }
+      if (matchesController.matchInfoModel!.matchPlaying11 == null) {
         return Center(
           child: Text(
             "No data found ",
@@ -130,25 +141,29 @@ class _TeamSquadsScreenState extends State<TeamSquadsScreen> {
                 const SizedBox(
                   height: Dimensions.paddingSizeDefault,
                 ),
-                Text(
-                  "Team Squad",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.fontSizeLarge),
-                ),
-                const SizedBox(
-                  height: Dimensions.paddingSizeDefault,
-                ),
                 Expanded(
                   child: ListView(
                     children: [
+                      Center(
+                        child: Text(
+                          "Playing 11",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Dimensions.fontSizeLarge),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: Dimensions.paddingSizeDefault,
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          matchesController.teamSquadModel!.teama != null
-                              ? matchesController
-                                          .teamSquadModel!.teama!.squads !=
+                          matchesController
+                                      .matchInfoModel!.matchPlaying11!.teama !=
+                                  null
+                              ? matchesController.matchInfoModel!
+                                          .matchPlaying11!.teama!.squads !=
                                       null
                                   ? Expanded(
                                       child: ListView.builder(
@@ -156,73 +171,45 @@ class _TeamSquadsScreenState extends State<TeamSquadsScreen> {
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           itemCount: matchesController
-                                              .teamSquadModel!
+                                              .matchInfoModel!
+                                              .matchPlaying11!
                                               .teama!
                                               .squads!
                                               .length,
                                           itemBuilder: (context, index) {
-                                            return Container(
-                                              margin: const EdgeInsets.only(
-                                                  bottom: Dimensions
-                                                      .paddingSizeDefault),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  SizedBox(
-                                                    child: Row(
-                                                      children: [
-                                                        /*
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50),
-                                                      child: Image.network(
+                                            return matchesController
+                                                        .matchInfoModel!
+                                                        .matchPlaying11!
+                                                        .teama!
+                                                        .squads![index]
+                                                        .playing11 ==
+                                                    "true"
+                                                ? Container(
+                                                    margin: const EdgeInsets
+                                                        .only(
+                                                        bottom: Dimensions
+                                                            .paddingSizeDefault),
+                                                    child: SizedBox(
+                                                      width: Get.width / 3,
+                                                      child: Text(
                                                         matchesController
-                                                            .homeTeamSquadPage!
-                                                            .data!
-                                                            .squad![index]
-                                                            .imagePath!,
-                                                        height: 35,
-                                                        fit: BoxFit.cover,
-                                                        width: 35,
+                                                                .matchInfoModel!
+                                                                .matchPlaying11!
+                                                                .teama!
+                                                                .squads![index]
+                                                                .name ??
+                                                            "",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
-                                                    ),*/
-                                                        const SizedBox(
-                                                          width: Dimensions
-                                                              .paddingSizeSmall,
-                                                        ),
-                                                        SizedBox(
-                                                          width: Get.width / 3,
-                                                          child: Text(
-                                                            matchesController
-                                                                    .teamSquadModel!
-                                                                    .teama!
-                                                                    .squads![
-                                                                        index]
-                                                                    .name ??
-                                                                "",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: Dimensions
-                                                                    .fontSizeLarge),
-                                                            maxLines: 2,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                          ),
-                                                        ),
-                                                      ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
+                                                  )
+                                                : SizedBox();
                                           }),
                                     )
                                   : SizedBox()
@@ -230,9 +217,11 @@ class _TeamSquadsScreenState extends State<TeamSquadsScreen> {
                           const SizedBox(
                             width: 4,
                           ),
-                          matchesController.teamSquadModel!.teamb != null
-                              ? matchesController
-                                          .teamSquadModel!.teamb!.squads !=
+                          matchesController
+                                      .matchInfoModel!.matchPlaying11!.teamb !=
+                                  null
+                              ? matchesController.matchInfoModel!
+                                          .matchPlaying11!.teamb!.squads !=
                                       null
                                   ? Expanded(
                                       child: ListView.builder(
@@ -240,46 +229,191 @@ class _TeamSquadsScreenState extends State<TeamSquadsScreen> {
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           itemCount: matchesController
-                                              .teamSquadModel!
+                                              .matchInfoModel!
+                                              .matchPlaying11!
                                               .teamb!
                                               .squads!
                                               .length,
                                           itemBuilder: (context, index) {
-                                            return Container(
-                                              margin: const EdgeInsets.only(
-                                                  bottom: Dimensions
-                                                      .paddingSizeDefault),
-                                              child: SizedBox(
-                                                width: Get.width / 3,
-                                                child: Text(
-                                                  matchesController
-                                                          .teamSquadModel!
-                                                          .teamb!
-                                                          .squads![index]
-                                                          .name ??
-                                                      "",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: Dimensions
-                                                          .fontSizeLarge),
-                                                  textAlign: TextAlign.end,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ),
-                                            );
+                                            return matchesController
+                                                        .matchInfoModel!
+                                                        .matchPlaying11!
+                                                        .teamb!
+                                                        .squads![index]
+                                                        .playing11 ==
+                                                    "true"
+                                                ? Container(
+                                                    margin: const EdgeInsets
+                                                        .only(
+                                                        bottom: Dimensions
+                                                            .paddingSizeDefault),
+                                                    child: SizedBox(
+                                                      width: Get.width / 3,
+                                                      child: Text(
+                                                        matchesController
+                                                                .matchInfoModel!
+                                                                .matchPlaying11!
+                                                                .teamb!
+                                                                .squads![index]
+                                                                .name ??
+                                                            "",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                        textAlign:
+                                                            TextAlign.end,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : SizedBox();
                                           }),
                                     )
                                   : SizedBox()
                               : SizedBox(),
                         ],
                       ),
+                      const SizedBox(
+                        height: Dimensions.paddingSizeDefault,
+                      ),
+                      Center(
+                        child: Text(
+                          "Bench",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Dimensions.fontSizeLarge),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: Dimensions.paddingSizeDefault,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          matchesController
+                                      .matchInfoModel!.matchPlaying11!.teama !=
+                                  null
+                              ? matchesController.matchInfoModel!
+                                          .matchPlaying11!.teama!.squads !=
+                                      null
+                                  ? Expanded(
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount: matchesController
+                                              .matchInfoModel!
+                                              .matchPlaying11!
+                                              .teama!
+                                              .squads!
+                                              .length,
+                                          itemBuilder: (context, index) {
+                                            return matchesController
+                                                        .matchInfoModel!
+                                                        .matchPlaying11!
+                                                        .teama!
+                                                        .squads![index]
+                                                        .playing11 !=
+                                                    "true"
+                                                ? Container(
+                                                    margin: const EdgeInsets
+                                                        .only(
+                                                        bottom: Dimensions
+                                                            .paddingSizeDefault),
+                                                    child: SizedBox(
+                                                      width: Get.width / 3,
+                                                      child: Text(
+                                                        matchesController
+                                                                .matchInfoModel!
+                                                                .matchPlaying11!
+                                                                .teama!
+                                                                .squads![index]
+                                                                .name ??
+                                                            "",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : SizedBox();
+                                          }),
+                                    )
+                                  : SizedBox()
+                              : SizedBox(),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          matchesController
+                                      .matchInfoModel!.matchPlaying11!.teamb !=
+                                  null
+                              ? matchesController.matchInfoModel!
+                                          .matchPlaying11!.teamb!.squads !=
+                                      null
+                                  ? Expanded(
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount: matchesController
+                                              .matchInfoModel!
+                                              .matchPlaying11!
+                                              .teamb!
+                                              .squads!
+                                              .length,
+                                          itemBuilder: (context, index) {
+                                            return matchesController
+                                                        .matchInfoModel!
+                                                        .matchPlaying11!
+                                                        .teamb!
+                                                        .squads![index]
+                                                        .playing11 !=
+                                                    "true"
+                                                ? Container(
+                                                    margin: const EdgeInsets
+                                                        .only(
+                                                        bottom: Dimensions
+                                                            .paddingSizeDefault),
+                                                    child: SizedBox(
+                                                      width: Get.width / 3,
+                                                      child: Text(
+                                                        matchesController
+                                                                .matchInfoModel!
+                                                                .matchPlaying11!
+                                                                .teamb!
+                                                                .squads![index]
+                                                                .name ??
+                                                            "",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                        textAlign:
+                                                            TextAlign.end,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : SizedBox();
+                                          }),
+                                    )
+                                  : SizedBox()
+                              : SizedBox(),
+                        ],
+                      )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ));

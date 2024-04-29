@@ -50,15 +50,11 @@ class AppConstants {
   static const String secretKey = 'c71b3e1c66ec04894a28ddebeb10f841';
 
   static const String cricketBaseUri = 'https://rest.entitysport.com';
-  static const String associationUri = '/association/list/';
-  static const String countryUri = '/country/list/';
-  static const String venueUri = '/venue/list/';
-  static const String tournamentsUri = '/featured-tournaments/';
-  static const String allMatchesUri = '/v2/matches/';
-  static const String rankingUri = '/v2/iccranks';
-  static const String playerUri = '/v2/players';
-  static const String competitionUri = '/v2/competitions';
-  static const String teamUri = '/v2/teams';
+  static const String allMatchesUri = '/exchange/matches/';
+  static const String rankingUri = '/exchange/iccranks';
+  static const String playerUri = '/exchange/players';
+  static const String competitionUri = '/exchange/competitions';
+  static const String teamUri = '/exchange/teams';
   static const String authUri = '/v2/auth';
 
   /// Shared Key

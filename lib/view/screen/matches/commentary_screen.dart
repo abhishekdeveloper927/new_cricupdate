@@ -20,7 +20,7 @@ class _CommentaryScreenState extends State<CommentaryScreen> {
   @override
   void initState() {
     Get.find<AllMatchesController>().getCommentaryByInning(
-        token: Get.find<AuthController>().entityToken!,
+        token: Get.find<AuthController>().entityToken,
         matchId: widget.matchModel.matchId!,
         inningsId: 1);
     super.initState();
