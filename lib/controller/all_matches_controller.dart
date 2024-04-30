@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cricupdate/data/model/response/commentary_page.dart';
 import 'package:cricupdate/data/model/response/competition_page.dart';
 import 'package:cricupdate/data/model/response/live_matchh_detail_page.dart';
@@ -178,6 +180,7 @@ class AllMatchesController extends GetxController implements GetxService {
       if (matchOddsPage != null) {
         if (matchOddsPage!.response != null) {
           matchOddsModel = matchOddsPage!.response;
+          print(jsonEncode(matchOddsModel));
         }
       }
     } else {
