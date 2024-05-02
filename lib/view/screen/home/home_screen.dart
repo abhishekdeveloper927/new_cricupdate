@@ -339,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: Dimensions.paddingSizeDefault,
                         ),
-                        bannerAd != null
+                        /*  bannerAd != null
                             ? Align(
                                 alignment: Alignment.bottomCenter,
                                 child: SafeArea(
@@ -350,7 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               )
-                            : const SizedBox(),
+                            : const SizedBox(),*/
                         SizedBox(
                           height: bannerAd != null
                               ? Dimensions.paddingSizeDefault
@@ -516,7 +516,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: Dimensions.paddingSizeDefault,
                         ),
-                        bannerAd != null
+                        /* bannerAd != null
                             ? Align(
                                 alignment: Alignment.bottomCenter,
                                 child: SafeArea(
@@ -527,7 +527,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               )
-                            : const SizedBox(),
+                            : const SizedBox(),*/
                         SizedBox(
                           height: bannerAd != null
                               ? Dimensions.paddingSizeDefault
