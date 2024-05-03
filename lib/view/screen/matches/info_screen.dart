@@ -143,7 +143,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             color: Colors.black,
                             fontSize: Dimensions.fontSizeLarge),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: Dimensions.paddingSizeDefault,
                       ),
                       Expanded(
