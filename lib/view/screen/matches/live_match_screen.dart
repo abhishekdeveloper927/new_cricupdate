@@ -1115,186 +1115,42 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                               height:
                                                   Dimensions.paddingSizeDefault,
                                             ),
-                                            authController
-                                                        .winningPredictionModel !=
-                                                    null
-                                                ? widget.match.status == 3
-                                                    ? Container(
-                                                        padding: const EdgeInsets
-                                                            .all(Dimensions
-                                                                .paddingSizeDefault),
-                                                        decoration: BoxDecoration(
-                                                            color: Get.theme
-                                                                .primaryColor,
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                    Dimensions
-                                                                        .radiusDefault)),
-                                                        child: Row(
-                                                          children: [
-                                                            Expanded(
-                                                              child: Text(
-                                                                "Winning Predictions",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        Dimensions
-                                                                            .fontSizeLarge),
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(6),
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .green,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              6)),
-                                                              child: Column(
-                                                                children: [
-                                                                  Text(
-                                                                    widget
-                                                                            .match
-                                                                            .teama!
-                                                                            .shortName ??
-                                                                        "",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeLarge),
-                                                                  ),
-                                                                  Text(
-                                                                    authController
-                                                                        .winningPredictionModel!
-                                                                        .teamAWinningProbability!
-                                                                        .round()
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeLarge),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                              width: Dimensions
-                                                                  .paddingSizeDefault,
-                                                            ),
-                                                            Container(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(6),
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .green,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              6)),
-                                                              child: Column(
-                                                                children: [
-                                                                  Text(
-                                                                    widget
-                                                                            .match
-                                                                            .teamb!
-                                                                            .shortName ??
-                                                                        "",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeLarge),
-                                                                  ),
-                                                                  Text(
-                                                                    authController
-                                                                        .winningPredictionModel!
-                                                                        .teamBWinningProbability!
-                                                                        .round()
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeLarge),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    : const SizedBox()
-                                                : const SizedBox(),
                                           ],
                                         )
                                       : const SizedBox(),
-                                  const SizedBox(
-                                    height: Dimensions.paddingSizeDefault,
-                                  ),
                                   Container(
                                     padding: const EdgeInsets.all(
                                         Dimensions.paddingSizeDefault),
                                     decoration: BoxDecoration(
-                                        color: Colors.grey[300],
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.circular(
-                                            Dimensions.radiusDefault)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                            Dimensions.radiusDefault),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[300]!,
+                                              blurRadius: 3)
+                                        ]),
+                                    child: Column(
                                       children: [
-                                        Text(
-                                          "Favorite Team",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:
-                                                  Dimensions.fontSizeLarge),
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          matchesController.matchInfoModel!
-                                                      .live!.teamBatting ==
-                                                  widget.match.teama!.name
-                                              ? widget.match.teama!.shortName!
-                                              : widget.match.teamb!.shortName!,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:
-                                                  Dimensions.fontSizeLarge),
-                                        ),
-                                        SizedBox(
-                                          width: Dimensions.paddingSizeDefault,
-                                        ),
-                                        matchesController.matchOddsModel != null
-                                            ? matchesController.matchOddsModel!
-                                                        .liveOdds !=
-                                                    null
+                                        authController.winningPredictionModel !=
+                                                null
+                                            ? widget.match.status == 3
                                                 ? SizedBox(
                                                     child: Row(
                                                       children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Winning Predictions",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: Dimensions
+                                                                    .fontSizeLarge),
+                                                          ),
+                                                        ),
                                                         Container(
                                                           padding:
                                                               const EdgeInsets
@@ -1306,232 +1162,332 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           6)),
-                                                          child: Text(
-                                                            matchesController
-                                                                        .matchInfoModel!
-                                                                        .live!
-                                                                        .teamBatting ==
-                                                                    widget
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                widget
                                                                         .match
                                                                         .teama!
-                                                                        .name
-                                                                ? matchesController
-                                                                    .matchOddsModel!
-                                                                    .liveOdds!
-                                                                    .matchodds!
-                                                                    .teama!
-                                                                    .lay!
-                                                                    .substring(
-                                                                        2)
-                                                                : matchesController
-                                                                    .matchOddsModel!
-                                                                    .liveOdds!
-                                                                    .matchodds!
-                                                                    .teamb!
-                                                                    .lay!
-                                                                    .substring(
-                                                                        2),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: Dimensions
-                                                                    .fontSizeLarge),
+                                                                        .shortName ??
+                                                                    "",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .fontSizeLarge),
+                                                              ),
+                                                              Text(
+                                                                authController
+                                                                    .winningPredictionModel!
+                                                                    .teamAWinningProbability!
+                                                                    .round()
+                                                                    .toString(),
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .fontSizeLarge),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                         const SizedBox(
-                                                          width: 10,
+                                                          width: Dimensions
+                                                              .paddingSizeDefault,
                                                         ),
                                                         Container(
                                                           padding:
                                                               const EdgeInsets
                                                                   .all(6),
                                                           decoration: BoxDecoration(
-                                                              color: Colors.red,
+                                                              color:
+                                                                  Colors.green,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
                                                                           6)),
-                                                          child: Text(
-                                                            matchesController
-                                                                        .matchInfoModel!
-                                                                        .live!
-                                                                        .teamBatting ==
-                                                                    widget
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                widget
                                                                         .match
-                                                                        .teama!
-                                                                        .name
-                                                                ? matchesController
-                                                                    .matchOddsModel!
-                                                                    .liveOdds!
-                                                                    .matchodds!
-                                                                    .teama!
-                                                                    .back!
-                                                                    .substring(
-                                                                        2)
-                                                                : matchesController
-                                                                    .matchOddsModel!
-                                                                    .liveOdds!
-                                                                    .matchodds!
-                                                                    .teamb!
-                                                                    .back!
-                                                                    .substring(
-                                                                        2),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: Dimensions
-                                                                    .fontSizeLarge),
+                                                                        .teamb!
+                                                                        .shortName ??
+                                                                    "",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .fontSizeLarge),
+                                                              ),
+                                                              Text(
+                                                                authController
+                                                                    .winningPredictionModel!
+                                                                    .teamBWinningProbability!
+                                                                    .round()
+                                                                    .toString(),
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .fontSizeLarge),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   )
+                                                : const SizedBox()
+                                            : const SizedBox(),
+                                        Divider(
+                                          color: Colors.grey,
+                                        ),
+                                        matchesController.matchOddsModel != null
+                                            ? matchesController.matchOddsModel!
+                                                        .liveOdds !=
+                                                    null
+                                                ? SizedBox(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          "Favorite Team",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: Dimensions
+                                                                  .fontSizeLarge),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          double.parse(matchesController
+                                                                      .matchOddsModel!
+                                                                      .liveOdds!
+                                                                      .matchodds!
+                                                                      .teama!
+                                                                      .lay!) <
+                                                                  double.parse(matchesController
+                                                                      .matchOddsModel!
+                                                                      .liveOdds!
+                                                                      .matchodds!
+                                                                      .teamb!
+                                                                      .lay!)
+                                                              ? widget
+                                                                  .match
+                                                                  .teama!
+                                                                  .shortName!
+                                                              : widget
+                                                                  .match
+                                                                  .teamb!
+                                                                  .shortName!,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: Dimensions
+                                                                  .fontSizeLarge),
+                                                        ),
+                                                        SizedBox(
+                                                          width: Dimensions
+                                                              .paddingSizeDefault,
+                                                        ),
+                                                        matchesController
+                                                                    .matchOddsModel !=
+                                                                null
+                                                            ? matchesController
+                                                                        .matchOddsModel!
+                                                                        .liveOdds !=
+                                                                    null
+                                                                ? SizedBox(
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Container(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              6),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Colors.green,
+                                                                              borderRadius: BorderRadius.circular(6)),
+                                                                          child:
+                                                                              Text(
+                                                                            double.parse(matchesController.matchOddsModel!.liveOdds!.matchodds!.teama!.lay!) < double.parse(matchesController.matchOddsModel!.liveOdds!.matchodds!.teamb!.lay!)
+                                                                                ? matchesController.matchOddsModel!.liveOdds!.matchodds!.teama!.lay!.substring(matchesController.matchOddsModel!.liveOdds!.matchodds!.teama!.lay!.length - 2)
+                                                                                : matchesController.matchOddsModel!.liveOdds!.matchodds!.teamb!.lay!.substring(matchesController.matchOddsModel!.liveOdds!.matchodds!.teamb!.lay!.length - 2),
+                                                                            style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: Dimensions.fontSizeLarge),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
+                                                                        Container(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              6),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Colors.red,
+                                                                              borderRadius: BorderRadius.circular(6)),
+                                                                          child:
+                                                                              Text(
+                                                                            double.parse(matchesController.matchOddsModel!.liveOdds!.matchodds!.teama!.lay!) < double.parse(matchesController.matchOddsModel!.liveOdds!.matchodds!.teamb!.lay!)
+                                                                                ? matchesController.matchOddsModel!.liveOdds!.matchodds!.teama!.back!.substring(matchesController.matchOddsModel!.liveOdds!.matchodds!.teama!.back!.length - 2)
+                                                                                : matchesController.matchOddsModel!.liveOdds!.matchodds!.teamb!.back!.substring(matchesController.matchOddsModel!.liveOdds!.matchodds!.teamb!.back!.length - 2),
+                                                                            style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: Dimensions.fontSizeLarge),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                : SizedBox()
+                                                            : SizedBox()
+                                                      ],
+                                                    ),
+                                                  )
                                                 : SizedBox()
-                                            : SizedBox()
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: Dimensions.paddingSizeDefault,
-                                  ),
-                                  matchesController.matchOddsModel != null
-                                      ? widget.match.status == 3
-                                          ? matchesController.matchOddsModel!
-                                                  .sessionOdds!.isNotEmpty
-                                              ? Container(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: Dimensions
-                                                          .paddingSizeDefault,
-                                                      right: Dimensions
-                                                          .paddingSizeDefault,
-                                                      top: Dimensions
-                                                          .paddingSizeDefault),
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.grey[300],
-                                                      borderRadius: BorderRadius
-                                                          .circular(Dimensions
-                                                              .radiusDefault)),
-                                                  child: ListView.builder(
-                                                      shrinkWrap: true,
-                                                      itemCount:
-                                                          matchesController
-                                                              .matchOddsModel!
-                                                              .sessionOdds!
-                                                              .length,
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        return matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("6 over run bhav") ||
+                                            : SizedBox(),
+                                        Divider(
+                                          color: Colors.grey,
+                                        ),
+                                        matchesController.matchOddsModel != null
+                                            ? widget.match.status == 3
+                                                ? matchesController
+                                                        .matchOddsModel!
+                                                        .sessionOdds!
+                                                        .isNotEmpty
+                                                    ? SizedBox(
+                                                        child: ListView.builder(
+                                                            shrinkWrap: true,
+                                                            itemCount:
                                                                 matchesController
                                                                     .matchOddsModel!
-                                                                    .sessionOdds![
-                                                                        index]
-                                                                    .title!
-                                                                    .startsWith(
-                                                                        "10 over run bhav") ||
-                                                                matchesController
-                                                                    .matchOddsModel!
-                                                                    .sessionOdds![
-                                                                        index]
-                                                                    .title!
-                                                                    .startsWith(
-                                                                        "15 over run bhav") ||
-                                                                matchesController
-                                                                    .matchOddsModel!
-                                                                    .sessionOdds![
-                                                                        index]
-                                                                    .title!
-                                                                    .startsWith(
-                                                                        "18 over run bhav") ||
-                                                                matchesController
-                                                                    .matchOddsModel!
-                                                                    .sessionOdds![
-                                                                        index]
-                                                                    .title!
-                                                                    .startsWith(
-                                                                        "19 over run bhav") ||
-                                                                matchesController
-                                                                    .matchOddsModel!
-                                                                    .sessionOdds![
-                                                                        index]
-                                                                    .title!
-                                                                    .startsWith(
-                                                                        "20 over run bhav")
-                                                            ? Container(
-                                                                margin: const EdgeInsets
-                                                                    .only(
-                                                                    bottom: Dimensions
-                                                                        .paddingSizeDefault),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Text(
+                                                                    .sessionOdds!
+                                                                    .length,
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            itemBuilder:
+                                                                (context,
+                                                                    index) {
+                                                              return matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("6 over run bhav") ||
                                                                       matchesController
                                                                           .matchOddsModel!
                                                                           .sessionOdds![
                                                                               index]
-                                                                          .title
-                                                                          .toString(),
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              Dimensions.fontSizeLarge),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      child:
-                                                                          Row(
-                                                                        children: [
-                                                                          Container(
-                                                                            padding:
-                                                                                const EdgeInsets.all(6),
-                                                                            decoration:
-                                                                                BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(6)),
-                                                                            child:
-                                                                                Text(
-                                                                              matchesController.matchOddsModel!.sessionOdds![index].layCondition.toString(),
-                                                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
-                                                                            ),
+                                                                          .title!
+                                                                          .startsWith(
+                                                                              "10 over run bhav") ||
+                                                                      matchesController
+                                                                          .matchOddsModel!
+                                                                          .sessionOdds![
+                                                                              index]
+                                                                          .title!
+                                                                          .startsWith(
+                                                                              "15 over run bhav") ||
+                                                                      matchesController
+                                                                          .matchOddsModel!
+                                                                          .sessionOdds![
+                                                                              index]
+                                                                          .title!
+                                                                          .startsWith(
+                                                                              "18 over run bhav") ||
+                                                                      matchesController
+                                                                          .matchOddsModel!
+                                                                          .sessionOdds![
+                                                                              index]
+                                                                          .title!
+                                                                          .startsWith(
+                                                                              "19 over run bhav") ||
+                                                                      matchesController
+                                                                          .matchOddsModel!
+                                                                          .sessionOdds![
+                                                                              index]
+                                                                          .title!
+                                                                          .startsWith(
+                                                                              "20 over run bhav")
+                                                                  ? Column(
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Text(
+                                                                                matchesController.matchOddsModel!.sessionOdds![index].title.toString(),
+                                                                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    Container(
+                                                                                      padding: const EdgeInsets.all(6),
+                                                                                      decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(6)),
+                                                                                      child: Text(
+                                                                                        matchesController.matchOddsModel!.sessionOdds![index].layCondition.toString(),
+                                                                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
+                                                                                      ),
+                                                                                    ),
+                                                                                    const SizedBox(
+                                                                                      width: 10,
+                                                                                    ),
+                                                                                    Container(
+                                                                                      padding: const EdgeInsets.all(6),
+                                                                                      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(6)),
+                                                                                      child: Text(
+                                                                                        matchesController.matchOddsModel!.sessionOdds![index].backCondition.toString(),
+                                                                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              )
+                                                                            ],
                                                                           ),
-                                                                          const SizedBox(
-                                                                            width:
-                                                                                10,
-                                                                          ),
-                                                                          Container(
-                                                                            padding:
-                                                                                const EdgeInsets.all(6),
-                                                                            decoration:
-                                                                                BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(6)),
-                                                                            child:
-                                                                                Text(
-                                                                              matchesController.matchOddsModel!.sessionOdds![index].backCondition.toString(),
-                                                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
+                                                                        ),
+                                                                        Divider(
+                                                                          color:
+                                                                              Colors.grey,
+                                                                        ),
+                                                                      ],
                                                                     )
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            : const SizedBox();
-                                                      }),
-                                                )
-                                              : const SizedBox()
-                                          : const SizedBox()
-                                      : const SizedBox(),
+                                                                  : const SizedBox();
+                                                            }),
+                                                      )
+                                                    : const SizedBox()
+                                                : const SizedBox()
+                                            : const SizedBox(),
+                                      ],
+                                    ),
+                                  ),
                                   SizedBox(
                                     height: Dimensions.paddingSizeDefault,
                                   ),

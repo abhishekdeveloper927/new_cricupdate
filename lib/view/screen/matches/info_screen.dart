@@ -256,7 +256,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   const SizedBox(
                     height: Dimensions.paddingSizeDefault,
-                  ),
+                  ), /*
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -267,7 +267,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             fontSize: Dimensions.fontSizeLarge),
                       ),
                     ],
-                  ),
+                  ),*/
                 ],
               ),
             ),
