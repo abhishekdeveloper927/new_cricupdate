@@ -8,6 +8,7 @@ class Images {
   static const String appIcon2 = 'assets/images/app_icon2.jpg';
   static const String crown = 'assets/images/crown.png';
   static const String ipl = 'assets/images/ipl.jpeg';
+  static const String ground = 'assets/images/ground.jpeg';
   static const String onBoarding1 = 'assets/images/onboarding1.png';
   static const String onBoarding2 = 'assets/images/onboarding2.png';
   static const String onBoarding3 = 'assets/images/onboarding3.png';

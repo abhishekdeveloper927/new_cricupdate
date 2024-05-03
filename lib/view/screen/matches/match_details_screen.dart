@@ -1,4 +1,5 @@
 import 'package:cricupdate/data/model/response/matchh_page.dart';
+import 'package:cricupdate/view/screen/competition_details/competition_details.dart';
 import 'package:cricupdate/view/screen/matches/commentary_screen.dart';
 import 'package:cricupdate/view/screen/matches/info_screen.dart';
 import 'package:cricupdate/view/screen/matches/live_match_screen.dart';
@@ -29,8 +30,7 @@ class MatchDetailsScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: Dimensions.fontSizeLarge),
           ),
-          actions: const [
-            /*
+          actions: [
             PopupMenuButton(
                 color: Colors.white,
                 itemBuilder: (context) {
@@ -38,7 +38,7 @@ class MatchDetailsScreen extends StatelessWidget {
                     const PopupMenuItem<int>(
                       value: 0,
                       child: Text(
-                        "Points Table",
+                        "Series Page",
                         style: TextStyle(color: Colors.black),
                       ),
                     ),
@@ -46,10 +46,10 @@ class MatchDetailsScreen extends StatelessWidget {
                 },
                 onSelected: (value) {
                   if (value == 0) {
-                    Get.to(() => PointTableScreen(
-                        sessionId: widget.fixtureMatchModel.seasonId!));
+                    Get.to(() => CompetitionDetailsScreen(
+                        competitionModel: match.competition!));
                   }
-                }),*/
+                }),
           ],
           bottom: TabBar(
             isScrollable: true,

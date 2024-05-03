@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontSize: Dimensions.fontSizeLarge),
                                 ),
                               ),
-                        const SizedBox(
+                        /* const SizedBox(
                           height: Dimensions.paddingSizeDefault,
                         ),
                         InkWell(
@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: Dimensions.paddingSizeDefault,
                         ),
-                        newsController.bannerList.isNotEmpty
+                        newsController.tournamentBannerList.isNotEmpty
                             ? CarouselSlider(
                                 carouselController: _carouselController,
                                 options: CarouselOptions(
@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 }).toList(),
                               )
-                            : const SizedBox(),
+                            : const SizedBox(),*/
                         const SizedBox(
                           height: Dimensions.paddingSizeDefault,
                         ),

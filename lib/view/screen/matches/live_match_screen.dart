@@ -347,7 +347,12 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                           : const SizedBox(),
                       widget.match.status == 3
                           ? Text(
-                              widget.match.statusNote ?? "",
+                              matchesController.matchInfoModel!.matchInfo !=
+                                      null
+                                  ? matchesController.matchInfoModel!.matchInfo!
+                                          .statusNote ??
+                                      ""
+                                  : "",
                               style: TextStyle(
                                   color: Get.theme.primaryColor,
                                   fontWeight: FontWeight.bold,

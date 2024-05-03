@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cricupdate/data/model/response/commentary_page.dart';
+import 'package:cricupdate/data/model/response/compeetition_info_page.dart';
 import 'package:cricupdate/data/model/response/competition_page.dart';
 import 'package:cricupdate/data/model/response/live_matchh_detail_page.dart';
 import 'package:cricupdate/data/model/response/match_info_page.dart';
@@ -45,6 +46,8 @@ class AllMatchesController extends GetxController implements GetxService {
   CommentaryModel? commentaryModel;
   RankingPage? rankingPage;
   RankingModel? rankingModel;
+  CompetitionInfoPage? competitionInfoPage;
+  CompetitionInfoModel? competitionInfoModel;
   CompetitionPage? competitionPage;
   List<CompetitionModel> liveCompetitionList = [];
   PlayerPage? playerPage;
@@ -283,6 +286,36 @@ class AllMatchesController extends GetxController implements GetxService {
               upcomingCompetitionList = competitionPage!.response!.items!;
             }
           }
+        }
+      }
+    } else {
+      isLoading = false;
+      throw Exception('Failed to load cricket data');
+    }
+    update();
+  }
+
+  Future<void> getCompetitionInfo({
+    required String token,
+    required int competitionId,
+  }) async {
+    competitionInfoPage = null;
+
+    competitionInfoModel = null;
+
+    isLoading = true;
+    final response = await http.get(Uri.parse(
+        "${AppConstants.cricketBaseUri}${AppConstants.competitionUri}/$competitionId/info?token=$token"));
+    print(
+        "${AppConstants.cricketBaseUri}${AppConstants.competitionUri}/$competitionId/info?token=$token");
+
+    if (response.statusCode == 200) {
+      isLoading = false;
+      competitionInfoPage = competitionInfoPageFromJson(response.body);
+
+      if (competitionInfoPage != null) {
+        if (competitionInfoPage!.response != null) {
+          competitionInfoModel = competitionInfoPage!.response;
         }
       }
     } else {

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cricupdate/data/model/response/competition_page.dart';
+
 MatchPage matchPageFromJson(String str) => MatchPage.fromJson(json.decode(str));
 
 String matchPageToJson(MatchPage data) => json.encode(data.toJson());
@@ -92,7 +94,7 @@ class Match {
   int? gameState;
   String? gameStateStr;
   String? domestic;
-  Competition? competition;
+  CompetitionModel? competition;
   Team? teama;
   Team? teamb;
   DateTime? dateStart;
@@ -185,7 +187,7 @@ class Match {
         domestic: json["domestic"],
         competition: json["competition"] == null
             ? null
-            : Competition.fromJson(json["competition"]),
+            : CompetitionModel.fromJson(json["competition"]),
         teama: json["teama"] == null ? null : Team.fromJson(json["teama"]),
         teamb: json["teamb"] == null ? null : Team.fromJson(json["teamb"]),
         dateStart: json["date_start"] == null
@@ -265,79 +267,6 @@ class Match {
         "day": day,
         "session": session,
         "toss": toss?.toJson(),
-      };
-}
-
-class Competition {
-  int? cid;
-  String? title;
-  String? abbr;
-  String? type;
-  String? category;
-  String? matchFormat;
-  String? season;
-  String? status;
-  DateTime? datestart;
-  DateTime? dateend;
-  String? country;
-  String? totalMatches;
-  String? totalRounds;
-  String? totalTeams;
-
-  Competition({
-    this.cid,
-    this.title,
-    this.abbr,
-    this.type,
-    this.category,
-    this.matchFormat,
-    this.season,
-    this.status,
-    this.datestart,
-    this.dateend,
-    this.country,
-    this.totalMatches,
-    this.totalRounds,
-    this.totalTeams,
-  });
-
-  factory Competition.fromJson(Map<String, dynamic> json) => Competition(
-        cid: json["cid"],
-        title: json["title"],
-        abbr: json["abbr"],
-        type: json["type"],
-        category: json["category"],
-        matchFormat: json["match_format"],
-        season: json["season"],
-        status: json["status"],
-        datestart: json["datestart"] == null
-            ? null
-            : DateTime.parse(json["datestart"]),
-        dateend:
-            json["dateend"] == null ? null : DateTime.parse(json["dateend"]),
-        country: json["country"],
-        totalMatches: json["total_matches"],
-        totalRounds: json["total_rounds"],
-        totalTeams: json["total_teams"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "cid": cid,
-        "title": title,
-        "abbr": abbr,
-        "type": type,
-        "category": category,
-        "match_format": matchFormat,
-        "season": season,
-        "status": status,
-        "datestart":
-            "${datestart!.year.toString().padLeft(4, '0')}-${datestart!.month.toString().padLeft(2, '0')}-${datestart!.day.toString().padLeft(2, '0')}",
-        "dateend":
-            "${dateend!.year.toString().padLeft(4, '0')}-${dateend!.month.toString().padLeft(2, '0')}-${dateend!.day.toString().padLeft(2, '0')}",
-        "country": country,
-        "total_matches": totalMatches,
-        "total_rounds": totalRounds,
-        "total_teams": totalTeams,
       };
 }
 
