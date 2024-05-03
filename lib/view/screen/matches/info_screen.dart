@@ -143,13 +143,18 @@ class _InfoScreenState extends State<InfoScreen> {
                             color: Colors.black,
                             fontSize: Dimensions.fontSizeLarge),
                       ),
-                      Text(
-                        DateFormat("hh:mm aaa")
-                            .format(widget.matchModel.dateStart!),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: Dimensions.fontSizeLarge),
+                      SizedBox(
+                        width: Dimensions.paddingSizeDefault,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "${DateFormat("hh:mm aaa").format(widget.matchModel.dateStart!.add(Duration(hours: 5, minutes: 30)))} Your Time \n ${DateFormat("hh:mm aaa").format(widget.matchModel.dateStart!)} Local",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Dimensions.fontSizeLarge),
+                          textAlign: TextAlign.end,
+                        ),
                       ),
                     ],
                   ),
