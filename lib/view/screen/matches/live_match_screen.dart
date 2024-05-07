@@ -1255,6 +1255,121 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                 color: Colors.grey,
                                               ),
                                               matchesController
+                                                          .matchInfoModel !=
+                                                      null
+                                                  ? widget.match.status == 3
+                                                      ? SizedBox(
+                                                          child: Row(
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  "Winning Predictions",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeLarge),
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(6),
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .green,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            6)),
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text(
+                                                                      widget.match.teama!
+                                                                              .shortName ??
+                                                                          "",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                              Dimensions.fontSizeLarge),
+                                                                    ),
+                                                                    Text(
+                                                                      authController
+                                                                          .winningPredictionModel!
+                                                                          .teamAWinningProbability!
+                                                                          .round()
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                              Dimensions.fontSizeLarge),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                width: Dimensions
+                                                                    .paddingSizeDefault,
+                                                              ),
+                                                              Container(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(6),
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .green,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            6)),
+                                                                child: Column(
+                                                                  children: [
+                                                                    Text(
+                                                                      widget.match.teamb!
+                                                                              .shortName ??
+                                                                          "",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                              Dimensions.fontSizeLarge),
+                                                                    ),
+                                                                    Text(
+                                                                      authController
+                                                                          .winningPredictionModel!
+                                                                          .teamBWinningProbability!
+                                                                          .round()
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                              Dimensions.fontSizeLarge),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : const SizedBox()
+                                                  : const SizedBox(),
+                                              Divider(
+                                                color: Colors.grey,
+                                              ),
+                                              matchesController
                                                           .matchOddsModel !=
                                                       null
                                                   ? matchesController
@@ -1587,5 +1702,13 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                 );
               });
             }));
+  }
+
+  int calculateTotalBalls(double overs) {
+    int completeOvers = overs.toInt(); // Get the integer part of overs
+    double remainingBalls = (overs - completeOvers) *
+        10; // Get the fractional part and convert it to balls
+
+    return (completeOvers * 6) + remainingBalls.toInt();
   }
 }
