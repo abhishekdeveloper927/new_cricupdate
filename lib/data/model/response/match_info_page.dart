@@ -947,7 +947,7 @@ class CurrentPartnershipBatsman {
 }
 
 class DidNotBat {
-  String? playerId;
+  dynamic playerId;
   String? name;
 
   DidNotBat({

@@ -109,7 +109,7 @@ class AllMatchesController extends GetxController implements GetxService {
 
     isLoading = true;
     final response = await http.get(Uri.parse(
-        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}?status=$status&format=$format&token=$token"));
+        "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}?status=$status&format=$format&token=$token&per_page=30"));
     print(
         "${AppConstants.cricketBaseUri}${AppConstants.allMatchesUri}?status=$status&format=$format&token=$token");
 

@@ -19,7 +19,7 @@ class _LiveCompetitionScreenState extends State<LiveCompetitionScreen> {
   @override
   void initState() {
     Get.find<AllMatchesController>().getCompetitionList(
-        token: Get.find<AuthController>().entityToken!, status: "live");
+        token: Get.find<AuthController>().entityToken, status: "live");
     super.initState();
   }
 

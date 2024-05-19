@@ -36,12 +36,12 @@ class _LiveMatchesListScreenState extends State<LiveMatchesListScreen> {
     await Get.find<AllMatchesController>().getAllMatches(
         token: Get
             .find<AuthController>()
-            .entityToken!, status: 3);
+            .entityToken, status: 3);
 
     await Get.find<AllMatchesController>().getCompetitionList(
         token: Get
             .find<AuthController>()
-            .entityToken!, status: "live");
+            .entityToken, status: "live");
   }
 
   void _onLoading() async {
@@ -81,7 +81,7 @@ class _LiveMatchesListScreenState extends State<LiveMatchesListScreen> {
                         matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 3);
                       },
                       child: Container(
@@ -116,7 +116,7 @@ class _LiveMatchesListScreenState extends State<LiveMatchesListScreen> {
                         matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 3,
                             format: 7);
                       },
@@ -151,7 +151,7 @@ class _LiveMatchesListScreenState extends State<LiveMatchesListScreen> {
                         await matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 3,
                             format: 6);
                       },
@@ -187,7 +187,7 @@ class _LiveMatchesListScreenState extends State<LiveMatchesListScreen> {
                         await matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 3,
                             format: 5);
                       },

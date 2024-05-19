@@ -1,6 +1,7 @@
 import 'package:cricupdate/controller/videos_controller.dart';
 import 'package:cricupdate/data/model/response/video_model.dart';
 import 'package:cricupdate/view/screen/videos/widget/featured_video_card.dart';
+import 'package:cricupdate/view/screen/videos/widget/featured_video_card1.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -148,7 +149,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                                         mainAxisSpacing: 10,
                                         crossAxisSpacing: 10),
                                 itemBuilder: (context, index) {
-                                  return FeaturedVideoCard(
+                                  return FeaturedVideoCard1(
                                       videoModel:
                                           videosController.videoList[index]);
                                 },

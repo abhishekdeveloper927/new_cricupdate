@@ -54,7 +54,7 @@ class _CommentaryScreenState extends State<CommentaryScreen> {
                     matchesController.updateInning(1);
                     await Get.find<AllMatchesController>()
                         .getCommentaryByInning(
-                            token: Get.find<AuthController>().entityToken!,
+                            token: Get.find<AuthController>().entityToken,
                             matchId: widget.matchModel.matchId!,
                             inningsId: 1);
                     setState(() {});
@@ -90,7 +90,7 @@ class _CommentaryScreenState extends State<CommentaryScreen> {
                     matchesController.updateInning(2);
                     await Get.find<AllMatchesController>()
                         .getCommentaryByInning(
-                            token: Get.find<AuthController>().entityToken!,
+                            token: Get.find<AuthController>().entityToken,
                             matchId: widget.matchModel.matchId!,
                             inningsId: 2);
                     setState(() {});

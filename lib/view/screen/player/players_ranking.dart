@@ -19,7 +19,7 @@ class _PlayersRankingScreenState extends State<PlayersRankingScreen> {
   @override
   void initState() {
     Get.find<AllMatchesController>()
-        .getRanking(token: Get.find<AuthController>().entityToken!);
+        .getRanking(token: Get.find<AuthController>().entityToken);
     super.initState();
   }
 

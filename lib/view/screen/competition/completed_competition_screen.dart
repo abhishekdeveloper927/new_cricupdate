@@ -20,7 +20,7 @@ class _CompletedCompetitionScreenState
   @override
   void initState() {
     Get.find<AllMatchesController>().getCompetitionList(
-        token: Get.find<AuthController>().entityToken!, status: "result");
+        token: Get.find<AuthController>().entityToken, status: "result");
     super.initState();
   }
 

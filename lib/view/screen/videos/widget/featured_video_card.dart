@@ -46,50 +46,63 @@ class _FeaturedVideoCardState extends State<FeaturedVideoCard> {
         Get.to(() => VideoDetailsScreen(videoModel: widget.videoModel));
       },
       child: Container(
-          margin: const EdgeInsets.only(
-            bottom: 16,
-          ),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radiusDefault)),
-          child: Stack(
-            children: [
-              Opacity(
-                opacity: 0.6,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                  child: Image.network(
-                    widget.videoModel.horizontalPoster ?? "",
-                    width: Get.width / 2 + 30,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+        width: Get.width - 70,
+        decoration: BoxDecoration(
+            color: Colors.grey[300]!,
+            borderRadius: BorderRadius.circular(Dimensions.radiusDefault)),
+        margin: const EdgeInsets.only(
+          bottom: 16,
+        ),
+        child: Column(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(Dimensions.radiusDefault),
+                        topRight: Radius.circular(Dimensions.radiusDefault))),
+                child: Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(Dimensions.radiusDefault),
+                            topRight:
+                                Radius.circular(Dimensions.radiusDefault)),
+                        child: Image.network(
+                          widget.videoModel.horizontalPoster ?? "",
+                          height: 180,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    const Positioned(
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Center(
+                            child: Icon(
+                          Icons.play_circle_fill,
+                          size: 50,
+                          color: Colors.red,
+                        ))),
+                  ],
+                )),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimensions.paddingSizeDefault, vertical: 4),
+              child: Text(
+                widget.videoModel.title ?? "",
+                style: TextStyle(
+                    color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              /*  ClipRRect(
-                borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                child: Image.network(
-                  widget.videoModel.horizontalPoster ?? "",
-                  width: Get.width,
-                  height: 200,
-                  fit: BoxFit.cover,
-                ),
-              ),*/
-              const SizedBox(
-                height: Dimensions.paddingSizeSmall,
-              ),
-              const Positioned(
-                  top: 0,
-                  bottom: 0,
-                  right: 0,
-                  left: 0,
-                  child: Center(
-                      child: Icon(
-                    Icons.play_circle_fill,
-                    size: 50,
-                    color: Colors.white,
-                  ))),
-            ],
-          )),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -19,7 +19,7 @@ class _UpcomingCompetitionScreenState extends State<UpcomingCompetitionScreen> {
   @override
   void initState() {
     Get.find<AllMatchesController>().getCompetitionList(
-        token: Get.find<AuthController>().entityToken!, status: "fixture");
+        token: Get.find<AuthController>().entityToken, status: "fixture");
     super.initState();
   }
 

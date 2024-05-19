@@ -17,7 +17,7 @@ class _TeamRankingScreenState extends State<TeamRankingScreen> {
   @override
   void initState() {
     Get.find<AllMatchesController>()
-        .getRanking(token: Get.find<AuthController>().entityToken!);
+        .getRanking(token: Get.find<AuthController>().entityToken);
 
     super.initState();
   }

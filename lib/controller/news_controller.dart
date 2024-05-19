@@ -26,11 +26,17 @@ class NewsController extends GetxController implements GetxService {
   List<TournamentBannerModel> tournamentBannerList = [];
   List<PhotosModel> photosList = [];
   int? selectedCategory;
+  int selectedHome = 0;
 
   int? selectedCategory2;
 
   void updateSelectedCategory(int index) {
     selectedCategory = index;
+    update();
+  }
+
+  void updateSelectedHome(int index) {
+    selectedHome = index;
     update();
   }
 

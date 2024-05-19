@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../util/dimensions.dart';
 import '../../../util/images.dart';
-import '../teams/team_details_screen.dart';
 
 class CompetitionVenueScreen extends StatefulWidget {
   final CompetitionModel competitionModel;

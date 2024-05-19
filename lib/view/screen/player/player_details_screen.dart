@@ -1,9 +1,7 @@
 import 'package:cricupdate/controller/all_matches_controller.dart';
 import 'package:cricupdate/controller/auth_controller.dart';
-import 'package:cricupdate/data/model/response/player_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../../util/dimensions.dart';
 import '../../../util/images.dart';
 
@@ -20,7 +18,7 @@ class _PlayerDetailsScreenState extends State<PlayerDetailsScreen> {
   @override
   void initState() {
     Get.find<AllMatchesController>().getPlayerStats(
-        token: Get.find<AuthController>().entityToken!, playerId: widget.id!);
+        token: Get.find<AuthController>().entityToken, playerId: widget.id);
     super.initState();
   }
 
@@ -135,7 +133,7 @@ class _PlayerDetailsScreenState extends State<PlayerDetailsScreen> {
                               fontSize: Dimensions.fontSizeLarge),
                         ),
                         Text(
-                          "${matchesController.playerStatsModel!.player!.firstName ?? ""} ${matchesController.playerStatsModel!.player!.lastName! ?? ""}",
+                          "${matchesController.playerStatsModel!.player!.firstName ?? ""} ${matchesController.playerStatsModel!.player!.lastName ?? ""}",
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,

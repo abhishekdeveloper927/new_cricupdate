@@ -22,7 +22,7 @@ class _TeamsScreenState extends State<TeamsScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<AllMatchesController>().getTeamsList(
-          token: Get.find<AuthController>().entityToken!, search: '');
+          token: Get.find<AuthController>().entityToken, search: '');
     });
 
     super.initState();
@@ -69,7 +69,7 @@ class _TeamsScreenState extends State<TeamsScreen> {
                   onChanged: (_) {
                     matchesController.getTeamsList(
                         search: searchController.text,
-                        token: Get.find<AuthController>().entityToken!);
+                        token: Get.find<AuthController>().entityToken);
                   },
                   style: const TextStyle(fontSize: 14, color: Colors.black),
                   decoration: const InputDecoration(

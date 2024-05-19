@@ -8,8 +8,10 @@ import '../match_details_screen.dart';
 class LiveMatchCard extends StatefulWidget {
   final Match matchModel;
   final double? width;
+  final bool margin;
 
-  const LiveMatchCard({super.key, required this.matchModel, this.width});
+  const LiveMatchCard(
+      {super.key, required this.matchModel, this.width, this.margin = false});
 
   @override
   State<LiveMatchCard> createState() => _LiveMatchCardState();
@@ -24,7 +26,8 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
       },
       child: Container(
         width: widget.width ?? Get.width,
-        margin: const EdgeInsets.only(bottom: Dimensions.paddingSizeDefault),
+        margin: EdgeInsets.only(
+            bottom: widget.margin ? 0 : Dimensions.paddingSizeDefault),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault)),
@@ -119,7 +122,7 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                 Expanded(
                   child: Text(
                     widget.matchModel.teama != null
-                        ? widget.matchModel.teama!.name ?? ""
+                        ? widget.matchModel.teama!.shortName ?? ""
                         : "",
                     style: TextStyle(
                         color: Colors.black,
@@ -199,7 +202,7 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                 Expanded(
                   child: Text(
                     widget.matchModel.teamb != null
-                        ? widget.matchModel.teamb!.name ?? ""
+                        ? widget.matchModel.teamb!.shortName ?? ""
                         : "",
                     style: TextStyle(
                         color: Colors.black,

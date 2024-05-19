@@ -2,7 +2,6 @@ import 'package:cricupdate/controller/all_matches_controller.dart';
 import 'package:cricupdate/controller/auth_controller.dart';
 import 'package:cricupdate/data/model/response/competition_page.dart';
 import 'package:cricupdate/view/base/loader.dart';
-import 'package:cricupdate/view/screen/competition/widgets/competition_card.dart';
 import 'package:cricupdate/view/screen/matches/widget/completed_match_card.dart';
 import 'package:cricupdate/view/screen/matches/widget/live_match_card.dart';
 import 'package:cricupdate/view/screen/matches/widget/match_card.dart';

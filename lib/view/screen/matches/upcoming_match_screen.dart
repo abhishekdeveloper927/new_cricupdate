@@ -34,10 +34,10 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
 
   Future<void> loadData() async {
     await Get.find<AllMatchesController>().getAllMatches(
-        token: Get.find<AuthController>().entityToken!, status: 1);
+        token: Get.find<AuthController>().entityToken, status: 1);
 
     await Get.find<AllMatchesController>().getCompetitionList(
-        token: Get.find<AuthController>().entityToken!, status: "fixture");
+        token: Get.find<AuthController>().entityToken, status: "fixture");
   }
 
   void _onLoading() async {
@@ -75,7 +75,7 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                           matchesController.updateMatchFormat(0);
                           setState(() {});
                           matchesController.getAllMatches(
-                              token: Get.find<AuthController>().entityToken!,
+                              token: Get.find<AuthController>().entityToken,
                               status: 1);
                         },
                         child: Container(
@@ -108,7 +108,7 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                           matchesController.updateMatchFormat(1);
                           setState(() {});
                           matchesController.getAllMatches(
-                              token: Get.find<AuthController>().entityToken!,
+                              token: Get.find<AuthController>().entityToken,
                               status: 1,
                               format: 7);
                         },
@@ -141,7 +141,7 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                         onTap: () async {
                           matchesController.updateMatchFormat(2);
                           await matchesController.getAllMatches(
-                              token: Get.find<AuthController>().entityToken!,
+                              token: Get.find<AuthController>().entityToken,
                               status: 1,
                               format: 6);
                         },
@@ -175,7 +175,7 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                           matchesController.updateMatchFormat(3);
                           setState(() {});
                           await matchesController.getAllMatches(
-                              token: Get.find<AuthController>().entityToken!,
+                              token: Get.find<AuthController>().entityToken,
                               status: 1,
                               format: 5);
                         },

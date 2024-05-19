@@ -22,7 +22,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<AllMatchesController>().getPlayerList(
-          token: Get.find<AuthController>().entityToken!, search: '');
+          token: Get.find<AuthController>().entityToken, search: '');
     });
 
     super.initState();
@@ -69,7 +69,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   onChanged: (_) {
                     matchesController.getPlayerList(
                         search: searchController.text,
-                        token: Get.find<AuthController>().entityToken!);
+                        token: Get.find<AuthController>().entityToken);
                   },
                   style: const TextStyle(fontSize: 14, color: Colors.black),
                   decoration: const InputDecoration(

@@ -13,9 +13,7 @@ import '../data/model/base/response_model.dart';
 import '../data/model/body/login_body.dart';
 import '../data/model/body/register_body.dart';
 import '../data/repository/auth_repo.dart';
-import '../util/app_constants.dart';
 import '../view/base/show_snackbar.dart';
-import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController implements GetxService {
   final AuthRepo authRepo;
@@ -28,7 +26,7 @@ class AuthController extends GetxController implements GetxService {
   int selectedIndex = 0;
   int selectedJob = 0;
   String newMessage = '';
-  String entityToken = "872632cd15b00f3cee02c27d141ac117";
+  String entityToken = "6b2854045f64a3afa49ae2be7e3b9e41";
   AuthModel? authModel;
   int selectedTime = 0;
   UserModel? userModel;

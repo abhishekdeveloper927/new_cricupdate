@@ -36,7 +36,7 @@ class _CompletedMatchScreenState extends State<CompletedMatchScreen> {
     await Get.find<AllMatchesController>().getAllMatches(
         token: Get
             .find<AuthController>()
-            .entityToken!, status: 2);
+            .entityToken, status: 2);
   }
 
   void _onLoading() async {
@@ -76,7 +76,7 @@ class _CompletedMatchScreenState extends State<CompletedMatchScreen> {
                         matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 2);
                       },
                       child: Container(
@@ -111,7 +111,7 @@ class _CompletedMatchScreenState extends State<CompletedMatchScreen> {
                         matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 2,
                             format: 7);
                       },
@@ -146,7 +146,7 @@ class _CompletedMatchScreenState extends State<CompletedMatchScreen> {
                         await matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 2,
                             format: 6);
                       },
@@ -182,7 +182,7 @@ class _CompletedMatchScreenState extends State<CompletedMatchScreen> {
                         await matchesController.getAllMatches(
                             token: Get
                                 .find<AuthController>()
-                                .entityToken!,
+                                .entityToken,
                             status: 2,
                             format: 5);
                       },
