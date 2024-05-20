@@ -86,6 +86,7 @@ class CompetitionModel {
   String? category;
   String? status;
   String? gameFormat;
+  String? matchFormat;
   String? season;
   DateTime? datestart;
   DateTime? dateend;
@@ -101,6 +102,7 @@ class CompetitionModel {
     this.category,
     this.status,
     this.gameFormat,
+    this.matchFormat,
     this.season,
     this.datestart,
     this.dateend,
@@ -117,7 +119,7 @@ class CompetitionModel {
         abbr: json["abbr"],
         category: json["category"],
         status: json["status"],
-        gameFormat: json["game_format"],
+        gameFormat: json["match_format"],
         season: json["season"],
         datestart: json["datestart"] == null
             ? null
@@ -136,7 +138,7 @@ class CompetitionModel {
         "abbr": abbr,
         "category": category,
         "status": status,
-        "game_format": gameFormat,
+        "match_format": gameFormat,
         "season": season,
         "datestart":
             "${datestart!.year.toString().padLeft(4, '0')}-${datestart!.month.toString().padLeft(2, '0')}-${datestart!.day.toString().padLeft(2, '0')}",

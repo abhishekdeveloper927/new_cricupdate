@@ -279,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CarouselSlider(
                                             options: CarouselOptions(
                                                 aspectRatio: 1.5,
-                                                viewportFraction: 0.95,
+                                                viewportFraction: 0.98,
                                                 initialPage: 0,
                                                 enableInfiniteScroll: true,
                                                 reverse: false,

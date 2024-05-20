@@ -938,7 +938,9 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                 ),
                               );
                             })
-                        : SizedBox(),
+                        : Center(
+                            child: Text(""),
+                          ),
                     const SizedBox(
                       height: Dimensions.paddingSizeDefault,
                     ),

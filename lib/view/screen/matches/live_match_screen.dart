@@ -521,25 +521,72 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                               padding: const EdgeInsets.all(2),
                               child: Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
+                                  Container(
+                                    padding: EdgeInsets.all(
+                                        Dimensions.paddingSizeDefault),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.radiusDefault),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[300]!,
+                                              blurRadius: 3)
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                matchesController
+                                                            .matchInfoModel!
+                                                            .live !=
+                                                        null
+                                                    ? matchesController
+                                                        .matchInfoModel!
+                                                        .live!
+                                                        .teamBatting
+                                                        .toString()
+                                                    : "",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: Dimensions
+                                                        .fontSizeLarge),
+                                              ),
+                                              Text(
+                                                matchesController
+                                                            .matchInfoModel!
+                                                            .live !=
+                                                        null
+                                                    ? matchesController
+                                                                .matchInfoModel!
+                                                                .live!
+                                                                .liveScore !=
+                                                            null
+                                                        ? "${matchesController.matchInfoModel!.live!.liveScore!.runs}/${matchesController.matchInfoModel!.live!.liveScore!.wickets}"
+                                                        : ""
+                                                    : "",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: Dimensions
+                                                        .fontSizeLarge),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              matchesController.matchInfoModel!
-                                                          .live !=
-                                                      null
-                                                  ? matchesController
-                                                      .matchInfoModel!
-                                                      .live!
-                                                      .teamBatting
-                                                      .toString()
-                                                  : "",
+                                              "Overs",
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold,
@@ -555,7 +602,7 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                               .live!
                                                               .liveScore !=
                                                           null
-                                                      ? "${matchesController.matchInfoModel!.live!.liveScore!.runs}/${matchesController.matchInfoModel!.live!.liveScore!.wickets}"
+                                                      ? "${matchesController.matchInfoModel!.live!.liveScore!.overs}"
                                                       : ""
                                                   : "",
                                               style: TextStyle(
@@ -566,41 +613,20 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                             ),
                                           ],
                                         ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Overs",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    Dimensions.fontSizeLarge),
-                                          ),
-                                          Text(
-                                            matchesController
-                                                        .matchInfoModel!.live !=
-                                                    null
-                                                ? matchesController
-                                                            .matchInfoModel!
-                                                            .live!
-                                                            .liveScore !=
-                                                        null
-                                                    ? "${matchesController.matchInfoModel!.live!.liveScore!.overs}"
-                                                    : ""
-                                                : "",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    Dimensions.fontSizeLarge),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: matchesController
+                                        SizedBox(
+                                          width: matchesController
+                                                      .matchInfoModel!.live !=
+                                                  null
+                                              ? matchesController
+                                                          .matchInfoModel!
+                                                          .live!
+                                                          .liveInningNumber ==
+                                                      2
+                                                  ? 16
+                                                  : 0
+                                              : 0,
+                                        ),
+                                        matchesController
                                                     .matchInfoModel!.live !=
                                                 null
                                             ? matchesController
@@ -608,136 +634,145 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                         .live!
                                                         .liveInningNumber ==
                                                     2
-                                                ? 16
-                                                : 0
-                                            : 0,
-                                      ),
-                                      matchesController.matchInfoModel!.live !=
-                                              null
-                                          ? matchesController.matchInfoModel!
-                                                      .live!.liveInningNumber ==
-                                                  2
-                                              ? Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "Target",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: Dimensions
-                                                              .fontSizeLarge),
-                                                    ),
-                                                    Text(
-                                                      matchesController
-                                                                  .matchInfoModel!
-                                                                  .live !=
-                                                              null
-                                                          ? matchesController
-                                                                      .matchInfoModel!
-                                                                      .live!
-                                                                      .liveScore !=
-                                                                  null
-                                                              ? "${matchesController.matchInfoModel!.live!.liveScore!.target}"
-                                                              : ""
-                                                          : "",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: Dimensions
-                                                              .fontSizeLarge),
-                                                    ),
-                                                  ],
-                                                )
-                                              : const SizedBox()
-                                          : const SizedBox(),
-                                    ],
+                                                ? Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        "Target",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: Dimensions
+                                                                .fontSizeLarge),
+                                                      ),
+                                                      Text(
+                                                        matchesController
+                                                                    .matchInfoModel!
+                                                                    .live !=
+                                                                null
+                                                            ? matchesController
+                                                                        .matchInfoModel!
+                                                                        .live!
+                                                                        .liveScore !=
+                                                                    null
+                                                                ? "${matchesController.matchInfoModel!.live!.liveScore!.target}"
+                                                                : ""
+                                                            : "",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: Dimensions
+                                                                .fontSizeLarge),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : const SizedBox()
+                                            : const SizedBox(),
+                                      ],
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: Dimensions.paddingSizeDefault,
                                   ),
-                                  const Divider(
-                                    color: Colors.grey,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "CRR",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize:
-                                                Dimensions.fontSizeDefault),
-                                      ),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
+                                  Container(
+                                    padding: EdgeInsets.all(
+                                        Dimensions.paddingSizeDefault),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.radiusDefault),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[300]!,
+                                              blurRadius: 3)
+                                        ]),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "CRR",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize:
+                                                  Dimensions.fontSizeDefault),
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          matchesController
+                                                      .matchInfoModel!.live !=
+                                                  null
+                                              ? matchesController
+                                                          .matchInfoModel!
+                                                          .live!
+                                                          .liveScore !=
+                                                      null
+                                                  ? "${matchesController.matchInfoModel!.live!.liveScore!.runrate}"
+                                                  : ""
+                                              : "",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize:
+                                                  Dimensions.fontSizeLarge),
+                                        ),
+                                        const Spacer(),
                                         matchesController
                                                     .matchInfoModel!.live !=
                                                 null
-                                            ? matchesController.matchInfoModel!
-                                                        .live!.liveScore !=
-                                                    null
-                                                ? "${matchesController.matchInfoModel!.live!.liveScore!.runrate}"
-                                                : ""
-                                            : "",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: Dimensions.fontSizeLarge),
-                                      ),
-                                      const Spacer(),
-                                      matchesController.matchInfoModel!.live !=
-                                              null
-                                          ? matchesController.matchInfoModel!
-                                                      .live!.liveInningNumber ==
-                                                  2
-                                              ? Text(
-                                                  "REQ",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                )
-                                              : const SizedBox()
-                                          : const SizedBox(),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      matchesController.matchInfoModel!.live !=
-                                              null
-                                          ? matchesController.matchInfoModel!
-                                                      .live!.liveInningNumber ==
-                                                  2
-                                              ? Text(
-                                                  matchesController
-                                                              .matchInfoModel!
-                                                              .live !=
-                                                          null
-                                                      ? matchesController
-                                                                  .matchInfoModel!
-                                                                  .live!
-                                                                  .liveScore !=
-                                                              null
-                                                          ? "${matchesController.matchInfoModel!.live!.liveScore!.requiredRunrate}"
-                                                          : ""
-                                                      : "",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: Dimensions
-                                                          .fontSizeLarge),
-                                                )
-                                              : const SizedBox()
-                                          : const SizedBox(),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    color: Colors.grey,
+                                            ? matchesController
+                                                        .matchInfoModel!
+                                                        .live!
+                                                        .liveInningNumber ==
+                                                    2
+                                                ? Text(
+                                                    "REQ",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: Dimensions
+                                                            .fontSizeDefault),
+                                                  )
+                                                : const SizedBox()
+                                            : const SizedBox(),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        matchesController
+                                                    .matchInfoModel!.live !=
+                                                null
+                                            ? matchesController
+                                                        .matchInfoModel!
+                                                        .live!
+                                                        .liveInningNumber ==
+                                                    2
+                                                ? Text(
+                                                    matchesController
+                                                                .matchInfoModel!
+                                                                .live !=
+                                                            null
+                                                        ? matchesController
+                                                                    .matchInfoModel!
+                                                                    .live!
+                                                                    .liveScore !=
+                                                                null
+                                                            ? "${matchesController.matchInfoModel!.live!.liveScore!.requiredRunrate}"
+                                                            : ""
+                                                        : "",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: Dimensions
+                                                            .fontSizeLarge),
+                                                  )
+                                                : const SizedBox()
+                                            : const SizedBox(),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -753,365 +788,309 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                   widget.match.status == 3
                                       ? Column(
                                           children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    "Batter",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: Dimensions
-                                                            .fontSizeDefault),
+                                            Container(
+                                              padding: EdgeInsets.all(Dimensions
+                                                  .paddingSizeDefault),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          Dimensions
+                                                              .radiusDefault),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color:
+                                                            Colors.grey[300]!,
+                                                        blurRadius: 3)
+                                                  ]),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Batter",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: Dimensions
+                                                                  .fontSizeDefault),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "R",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 18,
+                                                      ),
+                                                      Text(
+                                                        "B",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 14,
+                                                      ),
+                                                      Text(
+                                                        "4's",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 16,
+                                                      ),
+                                                      Text(
+                                                        "6's",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                                Text(
-                                                  "R",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                                const SizedBox(
-                                                  width: 18,
-                                                ),
-                                                Text(
-                                                  "B",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                                const SizedBox(
-                                                  width: 14,
-                                                ),
-                                                Text(
-                                                  "4's",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                                const SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Text(
-                                                  "6's",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height:
-                                                  Dimensions.paddingSizeDefault,
-                                            ),
-                                            matchesController
-                                                        .matchInfoModel!.live !=
-                                                    null
-                                                ? SizedBox(
-                                                    height: 50,
-                                                    child: ListView.builder(
-                                                        physics:
-                                                            const ScrollPhysics(),
-                                                        itemCount:
-                                                            matchesController
-                                                                .matchInfoModel!
-                                                                .live!
-                                                                .batsmen!
-                                                                .length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return Container(
-                                                            margin: const EdgeInsets
-                                                                .only(
-                                                                bottom: Dimensions
-                                                                    .paddingSizeExtraSmall),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Expanded(
-                                                                  child: Text(
-                                                                    matchesController
-                                                                            .matchInfoModel!
-                                                                            .live!
-                                                                            .batsmen![index]
-                                                                            .name ??
-                                                                        "",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .blue,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            Dimensions.fontSizeDefault),
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  matchesController
-                                                                      .matchInfoModel!
-                                                                      .live!
-                                                                      .batsmen![
-                                                                          index]
-                                                                      .runs
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeDefault),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 20,
-                                                                ),
-                                                                Text(
-                                                                  matchesController
-                                                                      .matchInfoModel!
-                                                                      .live!
-                                                                      .batsmen![
-                                                                          index]
-                                                                      .ballsFaced
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeDefault),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 20,
-                                                                ),
-                                                                Text(
-                                                                  matchesController
-                                                                      .matchInfoModel!
-                                                                      .live!
-                                                                      .batsmen![
-                                                                          index]
-                                                                      .fours
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeDefault),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 20,
-                                                                ),
-                                                                Text(
-                                                                  matchesController
-                                                                      .matchInfoModel!
-                                                                      .live!
-                                                                      .batsmen![
-                                                                          index]
-                                                                      .sixes
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeDefault),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          );
-                                                        }),
-                                                  )
-                                                : const SizedBox(),
-                                            const SizedBox(
-                                              height:
-                                                  Dimensions.paddingSizeDefault,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    "Bowler",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: Dimensions
-                                                            .fontSizeDefault),
+                                                  const SizedBox(
+                                                    height: Dimensions
+                                                        .paddingSizeDefault,
                                                   ),
-                                                ),
-                                                Text(
-                                                  "O",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Text(
-                                                  "M",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Text(
-                                                  "R",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Text(
-                                                  "W",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: Dimensions
-                                                          .fontSizeDefault),
-                                                ),
-                                              ],
+                                                  matchesController
+                                                              .matchInfoModel!
+                                                              .live !=
+                                                          null
+                                                      ? SizedBox(
+                                                          height: 50,
+                                                          child:
+                                                              ListView.builder(
+                                                                  physics:
+                                                                      const ScrollPhysics(),
+                                                                  itemCount: matchesController
+                                                                      .matchInfoModel!
+                                                                      .live!
+                                                                      .batsmen!
+                                                                      .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          index) {
+                                                                    return Container(
+                                                                      margin: const EdgeInsets
+                                                                          .only(
+                                                                          bottom:
+                                                                              Dimensions.paddingSizeExtraSmall),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Expanded(
+                                                                            child:
+                                                                                Text(
+                                                                              matchesController.matchInfoModel!.live!.batsmen![index].name ?? "",
+                                                                              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeDefault),
+                                                                            ),
+                                                                          ),
+                                                                          Text(
+                                                                            matchesController.matchInfoModel!.live!.batsmen![index].runs.toString(),
+                                                                            style:
+                                                                                TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            width:
+                                                                                20,
+                                                                          ),
+                                                                          Text(
+                                                                            matchesController.matchInfoModel!.live!.batsmen![index].ballsFaced.toString(),
+                                                                            style:
+                                                                                TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            width:
+                                                                                20,
+                                                                          ),
+                                                                          Text(
+                                                                            matchesController.matchInfoModel!.live!.batsmen![index].fours.toString(),
+                                                                            style:
+                                                                                TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            width:
+                                                                                20,
+                                                                          ),
+                                                                          Text(
+                                                                            matchesController.matchInfoModel!.live!.batsmen![index].sixes.toString(),
+                                                                            style:
+                                                                                TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  }),
+                                                        )
+                                                      : const SizedBox(),
+                                                ],
+                                              ),
                                             ),
                                             const SizedBox(
                                               height:
                                                   Dimensions.paddingSizeDefault,
                                             ),
-                                            matchesController.matchInfoModel!
-                                                            .live!.bowlers !=
-                                                        null ||
-                                                    matchesController
-                                                        .matchInfoModel!
-                                                        .live!
-                                                        .bowlers!
-                                                        .isNotEmpty
-                                                ? SizedBox(
-                                                    height: 30,
-                                                    child: ListView.builder(
-                                                        itemCount: matchesController
-                                                                    .matchInfoModel!
-                                                                    .live!
-                                                                    .bowlers!
-                                                                    .length >
-                                                                1
-                                                            ? 1
-                                                            : matchesController
-                                                                .matchInfoModel!
-                                                                .live!
-                                                                .bowlers!
-                                                                .length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Expanded(
-                                                                child: Text(
-                                                                  matchesController
-                                                                          .matchInfoModel!
-                                                                          .live!
-                                                                          .bowlers![
-                                                                              index]
-                                                                          .name ??
-                                                                      "",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .blue,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .fontSizeDefault),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                matchesController
-                                                                    .matchInfoModel!
-                                                                    .live!
-                                                                    .bowlers![
-                                                                        index]
-                                                                    .overs
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        Dimensions
-                                                                            .fontSizeDefault),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Text(
-                                                                matchesController
-                                                                    .matchInfoModel!
-                                                                    .live!
-                                                                    .bowlers![
-                                                                        index]
-                                                                    .maidens
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        Dimensions
-                                                                            .fontSizeDefault),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Text(
-                                                                matchesController
-                                                                    .matchInfoModel!
-                                                                    .live!
-                                                                    .bowlers![
-                                                                        index]
-                                                                    .runsConceded
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        Dimensions
-                                                                            .fontSizeDefault),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Text(
-                                                                matchesController
-                                                                    .matchInfoModel!
-                                                                    .live!
-                                                                    .bowlers![
-                                                                        index]
-                                                                    .wickets
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        Dimensions
-                                                                            .fontSizeDefault),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        }),
-                                                  )
-                                                : const SizedBox(),
+                                            Container(
+                                              padding: EdgeInsets.all(Dimensions
+                                                  .paddingSizeDefault),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          Dimensions
+                                                              .radiusDefault),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color:
+                                                            Colors.grey[300]!,
+                                                        blurRadius: 3)
+                                                  ]),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Bowler",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: Dimensions
+                                                                  .fontSizeDefault),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "O",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Text(
+                                                        "M",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Text(
+                                                        "R",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Text(
+                                                        "W",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: Dimensions
+                                                                .fontSizeDefault),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: Dimensions
+                                                        .paddingSizeDefault,
+                                                  ),
+                                                  matchesController
+                                                              .matchInfoModel!
+                                                              .live !=
+                                                          null
+                                                      ? matchesController
+                                                                      .matchInfoModel!
+                                                                      .live!
+                                                                      .bowlers !=
+                                                                  null ||
+                                                              matchesController
+                                                                  .matchInfoModel!
+                                                                  .live!
+                                                                  .bowlers!
+                                                                  .isNotEmpty
+                                                          ? SizedBox(
+                                                              height: 30,
+                                                              child: ListView
+                                                                  .builder(
+                                                                      itemCount: matchesController.matchInfoModel!.live!.bowlers!.length >
+                                                                              1
+                                                                          ? 1
+                                                                          : matchesController
+                                                                              .matchInfoModel!
+                                                                              .live!
+                                                                              .bowlers!
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                matchesController.matchInfoModel!.live!.bowlers![index].name ?? "",
+                                                                                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeDefault),
+                                                                              ),
+                                                                            ),
+                                                                            Text(
+                                                                              matchesController.matchInfoModel!.live!.bowlers![index].overs.toString(),
+                                                                              style: TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 20,
+                                                                            ),
+                                                                            Text(
+                                                                              matchesController.matchInfoModel!.live!.bowlers![index].maidens.toString(),
+                                                                              style: TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 20,
+                                                                            ),
+                                                                            Text(
+                                                                              matchesController.matchInfoModel!.live!.bowlers![index].runsConceded.toString(),
+                                                                              style: TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 20,
+                                                                            ),
+                                                                            Text(
+                                                                              matchesController.matchInfoModel!.live!.bowlers![index].wickets.toString(),
+                                                                              style: TextStyle(color: Colors.black, fontSize: Dimensions.fontSizeDefault),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      }),
+                                                            )
+                                                          : const SizedBox()
+                                                      : SizedBox(),
+                                                ],
+                                              ),
+                                            ),
                                             Divider(
                                               color: Colors.grey[300],
                                               thickness: 1,

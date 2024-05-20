@@ -128,6 +128,7 @@ class AllMatchesController extends GetxController implements GetxService {
             }
             if (status == 3) {
               liveMatchList = matchPage!.response!.items!;
+              print(jsonEncode(liveMatchList));
             }
           }
         }

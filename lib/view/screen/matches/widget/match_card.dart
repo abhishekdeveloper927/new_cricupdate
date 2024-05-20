@@ -24,6 +24,7 @@ class _MatchCardState extends State<MatchCard> {
         Get.to(() => MatchDetailsScreen(match: widget.matchModel));
       },
       child: Container(
+        padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
         width: widget.width ?? Get.width,
         margin: const EdgeInsets.only(bottom: Dimensions.paddingSizeDefault),
         decoration: BoxDecoration(
@@ -32,165 +33,161 @@ class _MatchCardState extends State<MatchCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(Dimensions.radiusDefault),
-                      topRight: Radius.circular(Dimensions.radiusDefault))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.matchModel.competition != null
-                          ? widget.matchModel.competition!.title ?? ''
-                          : "",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: Dimensions.fontSizeLarge,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                    ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.matchModel.competition != null
+                        ? widget.matchModel.competition!.title ?? ''
+                        : "",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: Dimensions.fontSizeLarge,
+                        fontWeight: FontWeight.bold),
+                    maxLines: 1,
                   ),
-                  const Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Colors.black,
-                    size: 19,
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(
+                  width: Dimensions.paddingSizeDefault,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Dimensions.paddingSizeDefault, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.radiusSmall)),
+                  child: Text(
+                    "Upcoming",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Dimensions.fontSizeSmall),
+                  ),
+                )
+              ],
             ),
             const SizedBox(
-              height: Dimensions.paddingSizeDefault,
+              height: Dimensions.paddingSizeSmall,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.matchModel.subtitle ?? "",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: Dimensions.fontSizeDefault,
+            const Divider(
+              color: Colors.grey,
+            ),
+            const SizedBox(
+              height: Dimensions.paddingSizeSmall,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          widget.matchModel.teama != null
+                              ? widget.matchModel.teama!.logoUrl ??
+                                  "https://cdn-icons-png.flaticon.com/512/690/690430.png"
+                              : "https://cdn-icons-png.flaticon.com/512/690/690430.png",
+                          height: 35,
+                          width: 35,
+                        ),
+                        const SizedBox(
+                          width: 14,
+                        ),
+                        Expanded(
+                          child: Text(
+                            widget.matchModel.teama != null
+                                ? widget.matchModel.teama!.name ?? ""
+                                : "",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.fontSizeDefault),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 6,
+                ),
+                const SizedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Dimensions.paddingSizeSmall,
                       ),
+                      Center(
+                        child: Icon(
+                          Icons.swap_horiz,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 6,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.matchModel.teamb != null
+                                ? widget.matchModel.teamb!.name ?? ""
+                                : "",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.fontSizeDefault),
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 14,
+                        ),
+                        Image.network(
+                          widget.matchModel.teamb != null
+                              ? widget.matchModel.teamb!.logoUrl ??
+                                  "https://cdn-icons-png.flaticon.com/512/690/690430.png"
+                              : "https://cdn-icons-png.flaticon.com/512/690/690430.png",
+                          height: 35,
+                          width: 35,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Dimensions.paddingSizeDefault, vertical: 8),
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radiusSmall)),
-                    child: Text(
-                      "Upcoming",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Dimensions.fontSizeSmall),
-                    ),
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
             const SizedBox(
               height: Dimensions.paddingSizeDefault,
             ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                Image.network(
-                  widget.matchModel.teama != null
-                      ? widget.matchModel.teama!.logoUrl ??
-                          "https://cdn-icons-png.flaticon.com/512/690/690430.png"
-                      : "https://cdn-icons-png.flaticon.com/512/690/690430.png",
-                  height: 30,
-                  width: 30,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  widget.matchModel.teama != null
-                      ? widget.matchModel.teama!.name ?? ""
-                      : "",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.fontSizeDefault),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                Image.network(
-                  widget.matchModel.teamb != null
-                      ? widget.matchModel.teamb!.logoUrl ??
-                          "https://cdn-icons-png.flaticon.com/512/690/690430.png"
-                      : "https://cdn-icons-png.flaticon.com/512/690/690430.png",
-                  height: 30,
-                  width: 30,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  widget.matchModel.teamb != null
-                      ? widget.matchModel.teamb!.name ?? ""
-                      : "",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.fontSizeDefault),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                DateFormat("yyyy-MMMM-dd")
-                    .add_jm()
-                    .format(widget.matchModel.dateStart!),
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimensions.fontSizeLarge),
-              ),
+            Text(
+              DateFormat("yyyy-MMMM-dd")
+                  .add_jm()
+                  .format(widget.matchModel.dateStart!),
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Dimensions.fontSizeLarge),
             ),
             const SizedBox(
               height: 6,
             ),
             widget.matchModel.venue != null
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      "Venue : ${widget.matchModel.venue!.location ?? ""}",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: Dimensions.fontSizeDefault),
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                ? Text(
+                    "Venue : ${widget.matchModel.venue!.location ?? ""}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: Dimensions.fontSizeDefault),
+                    overflow: TextOverflow.ellipsis,
                   )
                 : const SizedBox(),
-            const SizedBox(
-              height: 20,
-            ),
           ],
         ),
       ),
