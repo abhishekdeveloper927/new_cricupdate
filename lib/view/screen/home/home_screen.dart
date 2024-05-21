@@ -118,15 +118,17 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Container(
                 margin: EdgeInsets.all(Dimensions.paddingSizeDefault),
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                  border: Border.all(color: Colors.white, width: 2),
+                  border: Border.all(color: Colors.white, width: 1),
                 ),
                 child: Text(
                   "Get Premium",
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.fontSizeSmall),
                 ),
               ),
             ),
@@ -170,7 +172,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               children: [
                                 Container(
-                                  height: 150,
+                                  height: newsController.selectedHome == 0
+                                      ? 150
+                                      : 50,
                                   decoration: BoxDecoration(
                                       color: Get.theme.primaryColor),
                                   child: Padding(
@@ -260,207 +264,238 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 200,
+                                  height: newsController.selectedHome == 0
+                                      ? 200
+                                      : 0,
                                 ),
                               ],
                             ),
-                            GetBuilder<AllMatchesController>(
-                                builder: (matchesController) {
-                              if (matchesController.isLoading) {
-                                return const Loader();
-                              }
-                              return matchesController.liveMatchList.isNotEmpty
-                                  ? Positioned(
-                                      left: 0,
-                                      right: 0,
-                                      top: 50,
-                                      child: Column(
-                                        children: [
-                                          CarouselSlider(
-                                            options: CarouselOptions(
-                                                aspectRatio: 1.5,
-                                                viewportFraction: 0.98,
-                                                initialPage: 0,
-                                                enableInfiniteScroll: true,
-                                                reverse: false,
-                                                autoPlay: false,
-                                                onPageChanged: (index, reason) {
-                                                  setState(() {});
-                                                  currentIndex = index;
-                                                },
-                                                autoPlayInterval:
-                                                    const Duration(seconds: 3),
-                                                autoPlayAnimationDuration:
-                                                    const Duration(
-                                                        milliseconds: 800),
-                                                autoPlayCurve:
-                                                    Curves.fastOutSlowIn,
-                                                enlargeCenterPage: false,
-                                                enlargeFactor: 0.3,
-                                                scrollDirection:
-                                                    Axis.horizontal),
-                                            items: matchesController
-                                                .liveMatchList
-                                                .map((i) {
-                                              return Builder(
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 16,
-                                                            left: 16),
-                                                    child: LiveMatchCard(
-                                                        margin: true,
-                                                        matchModel: i),
-                                                  );
-                                                },
-                                              );
-                                            }).toList(),
-                                          ),
-                                          SizedBox(
-                                            height: Dimensions.paddingSizeSmall,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: matchesController
-                                                .liveMatchList
-                                                .asMap()
-                                                .entries
-                                                .map((entry) {
-                                              return GestureDetector(
-                                                onTap: () => controller
-                                                    .animateToPage(entry.key),
-                                                child: Container(
-                                                  padding: EdgeInsets.all(2),
-                                                  width: 12.0,
-                                                  height: 12.0,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 8.0,
-                                                      horizontal: 4.0),
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.grey),
-                                                      shape: BoxShape.circle,
-                                                      color: currentIndex ==
-                                                              entry.key
-                                                          ? Colors.grey
-                                                          : Get.theme
-                                                              .scaffoldBackgroundColor),
+                            newsController.selectedHome == 0
+                                ? GetBuilder<AllMatchesController>(
+                                    builder: (matchesController) {
+                                    if (matchesController.isLoading) {
+                                      return const Loader();
+                                    }
+                                    return matchesController
+                                            .liveMatchList.isNotEmpty
+                                        ? Positioned(
+                                            left: 0,
+                                            right: 0,
+                                            top: 50,
+                                            child: Column(
+                                              children: [
+                                                CarouselSlider(
+                                                  options: CarouselOptions(
+                                                      aspectRatio: 1.5,
+                                                      viewportFraction: 0.98,
+                                                      initialPage: 0,
+                                                      enableInfiniteScroll:
+                                                          true,
+                                                      reverse: false,
+                                                      autoPlay: false,
+                                                      onPageChanged:
+                                                          (index, reason) {
+                                                        setState(() {});
+                                                        currentIndex = index;
+                                                      },
+                                                      autoPlayInterval:
+                                                          const Duration(
+                                                              seconds: 3),
+                                                      autoPlayAnimationDuration:
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  800),
+                                                      autoPlayCurve:
+                                                          Curves.fastOutSlowIn,
+                                                      enlargeCenterPage: false,
+                                                      enlargeFactor: 0.3,
+                                                      scrollDirection:
+                                                          Axis.horizontal),
+                                                  items: matchesController
+                                                      .liveMatchList
+                                                      .map((i) {
+                                                    return Builder(
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 16,
+                                                                  left: 16),
+                                                          child: LiveMatchCard(
+                                                              margin: true,
+                                                              matchModel: i),
+                                                        );
+                                                      },
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                                SizedBox(
+                                                  height: Dimensions
+                                                      .paddingSizeSmall,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: matchesController
+                                                      .liveMatchList
+                                                      .asMap()
+                                                      .entries
+                                                      .map((entry) {
+                                                    return GestureDetector(
+                                                      onTap: () => controller
+                                                          .animateToPage(
+                                                              entry.key),
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(2),
+                                                        width: 8.0,
+                                                        height: 8.0,
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 8.0,
+                                                                horizontal:
+                                                                    4.0),
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .grey),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color: currentIndex ==
+                                                                    entry.key
+                                                                ? Colors.grey
+                                                                : Get.theme
+                                                                    .scaffoldBackgroundColor),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : matchesController
+                                                .upcomingMatchList.isNotEmpty
+                                            ? Positioned(
+                                                left: 0,
+                                                right: 0,
+                                                top: 50,
+                                                child: Column(
+                                                  children: [
+                                                    CarouselSlider(
+                                                      options: CarouselOptions(
+                                                          aspectRatio: 1.4,
+                                                          viewportFraction:
+                                                              0.95,
+                                                          initialPage: 0,
+                                                          enableInfiniteScroll:
+                                                              true,
+                                                          reverse: false,
+                                                          autoPlay: false,
+                                                          onPageChanged:
+                                                              (index, reason) {
+                                                            setState(() {});
+                                                            currentIndex1 =
+                                                                index;
+                                                          },
+                                                          autoPlayInterval:
+                                                              const Duration(
+                                                                  seconds: 3),
+                                                          autoPlayAnimationDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      800),
+                                                          autoPlayCurve: Curves
+                                                              .fastOutSlowIn,
+                                                          enlargeCenterPage:
+                                                              false,
+                                                          enlargeFactor: 0.3,
+                                                          scrollDirection:
+                                                              Axis.horizontal),
+                                                      items: matchesController
+                                                          .upcomingMatchList
+                                                          .map((i) {
+                                                        return Builder(
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      right: 16,
+                                                                      left: 16),
+                                                              child: MatchCard(
+                                                                  matchModel:
+                                                                      i),
+                                                            );
+                                                          },
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                    SizedBox(
+                                                      height: Dimensions
+                                                          .paddingSizeSmall,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children:
+                                                          matchesController
+                                                              .upcomingMatchList
+                                                              .asMap()
+                                                              .entries
+                                                              .map((entry) {
+                                                        return GestureDetector(
+                                                          onTap: () => controller
+                                                              .animateToPage(
+                                                                  entry.key),
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    2),
+                                                            width: 12.0,
+                                                            height: 12.0,
+                                                            margin: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        8.0,
+                                                                    horizontal:
+                                                                        4.0),
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .grey),
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: currentIndex1 ==
+                                                                        entry
+                                                                            .key
+                                                                    ? Colors
+                                                                        .grey
+                                                                    : Get.theme
+                                                                        .scaffoldBackgroundColor),
+                                                          ),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Center(
+                                                child: Text(
+                                                  "No data found",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: Dimensions
+                                                          .fontSizeLarge,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               );
-                                            }).toList(),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : matchesController
-                                          .upcomingMatchList.isNotEmpty
-                                      ? Positioned(
-                                          left: 0,
-                                          right: 0,
-                                          top: 50,
-                                          child: Column(
-                                            children: [
-                                              CarouselSlider(
-                                                options: CarouselOptions(
-                                                    aspectRatio: 1.4,
-                                                    viewportFraction: 0.95,
-                                                    initialPage: 0,
-                                                    enableInfiniteScroll: true,
-                                                    reverse: false,
-                                                    autoPlay: false,
-                                                    onPageChanged:
-                                                        (index, reason) {
-                                                      setState(() {});
-                                                      currentIndex1 = index;
-                                                    },
-                                                    autoPlayInterval:
-                                                        const Duration(
-                                                            seconds: 3),
-                                                    autoPlayAnimationDuration:
-                                                        const Duration(
-                                                            milliseconds: 800),
-                                                    autoPlayCurve:
-                                                        Curves.fastOutSlowIn,
-                                                    enlargeCenterPage: false,
-                                                    enlargeFactor: 0.3,
-                                                    scrollDirection:
-                                                        Axis.horizontal),
-                                                items: matchesController
-                                                    .upcomingMatchList
-                                                    .map((i) {
-                                                  return Builder(
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 16,
-                                                                left: 16),
-                                                        child: MatchCard(
-                                                            matchModel: i),
-                                                      );
-                                                    },
-                                                  );
-                                                }).toList(),
-                                              ),
-                                              SizedBox(
-                                                height:
-                                                    Dimensions.paddingSizeSmall,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: matchesController
-                                                    .upcomingMatchList
-                                                    .asMap()
-                                                    .entries
-                                                    .map((entry) {
-                                                  return GestureDetector(
-                                                    onTap: () => controller
-                                                        .animateToPage(
-                                                            entry.key),
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.all(2),
-                                                      width: 12.0,
-                                                      height: 12.0,
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 8.0,
-                                                              horizontal: 4.0),
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.grey),
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: currentIndex1 ==
-                                                                  entry.key
-                                                              ? Colors.grey
-                                                              : Get.theme
-                                                                  .scaffoldBackgroundColor),
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      : Center(
-                                          child: Text(
-                                            "No data found",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize:
-                                                    Dimensions.fontSizeLarge,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        );
-                            }),
+                                  })
+                                : SizedBox(),
                           ],
                         ),
                         newsController.selectedHome == 0

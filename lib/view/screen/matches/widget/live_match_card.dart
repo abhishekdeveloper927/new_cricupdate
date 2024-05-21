@@ -31,44 +31,50 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
         margin: EdgeInsets.only(
             bottom: widget.margin ? 0 : Dimensions.paddingSizeDefault),
         decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.grey[300]!, blurRadius: 3)],
             color: Colors.white,
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.matchModel.competition!.title ?? '',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: Dimensions.fontSizeDefault,
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.matchModel.competition!.title ?? '',
+                        style: TextStyle(
+                          color: Color(0xff373535),
+                          fontSize: Dimensions.fontSizeDefault,
+                        ),
+                        maxLines: 1,
                       ),
-                      maxLines: 1,
-                    ),
+                      Divider(
+                        color: Colors.grey,
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    width: 4,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: Color(0xff373535),
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.radiusSmall)),
+                  child: Text(
+                    "Live",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Dimensions.fontSizeSmall),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: Dimensions.paddingSizeDefault, vertical: 8),
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radiusSmall)),
-                    child: Text(
-                      "Live",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Dimensions.fontSizeSmall),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
             const SizedBox(
               height: Dimensions.paddingSizeDefault,
@@ -99,7 +105,8 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                               Text(
                                 widget.matchModel.teama!.scores ?? "0",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color(0xff373535),
+                                    fontWeight: FontWeight.bold,
                                     fontSize: widget.matchModel.competition!
                                                     .gameFormat ==
                                                 'test' ||
@@ -110,12 +117,13 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                                         : Dimensions.fontSizeDefault),
                               ),
                               SizedBox(
-                                height: 6,
+                                height: 4,
                               ),
                               Text(
                                 "${widget.matchModel.teama!.overs ?? ""} Overs",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color(0xff373535),
+                                    fontWeight: FontWeight.bold,
                                     fontSize: widget.matchModel.competition!
                                                     .gameFormat ==
                                                 'test' ||
@@ -167,7 +175,8 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                               Text(
                                 widget.matchModel.teamb!.scores ?? "0",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color(0xff373535),
+                                    fontWeight: FontWeight.bold,
                                     fontSize: widget.matchModel.competition!
                                                     .gameFormat ==
                                                 'test' ||
@@ -179,12 +188,13 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                                 textAlign: TextAlign.end,
                               ),
                               SizedBox(
-                                height: 6,
+                                height: 4,
                               ),
                               Text(
                                 "${widget.matchModel.teamb!.overs ?? ""} Overs",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color(0xff373535),
+                                    fontWeight: FontWeight.bold,
                                     fontSize: widget.matchModel.competition!
                                                     .gameFormat ==
                                                 'test' ||
@@ -219,6 +229,7 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
               height: Dimensions.paddingSizeExtraSmall,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Text(
@@ -248,13 +259,13 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
               ],
             ),
             SizedBox(
-              height: Dimensions.paddingSizeSmall,
+              height: Dimensions.paddingSizeExtraSmall,
             ),
             const Divider(
               color: Colors.grey,
             ),
             SizedBox(
-              height: Dimensions.paddingSizeSmall,
+              height: Dimensions.paddingSizeExtraSmall,
             ),
             /*
             Row(
@@ -421,7 +432,7 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                   ? widget.matchModel.toss!.text ?? ""
                   : "",
               style: TextStyle(
-                  color: Colors.blue,
+                  color: Color(0xff820000),
                   fontWeight: FontWeight.bold,
                   fontSize: Dimensions.fontSizeDefault),
               maxLines: 2,
@@ -453,9 +464,6 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                   ),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 16,
             ),
           ],
         ),

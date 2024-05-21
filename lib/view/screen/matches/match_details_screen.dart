@@ -52,15 +52,16 @@ class MatchDetailsScreen extends StatelessWidget {
                 }),
           ],
           bottom: TabBar(
+            tabAlignment: TabAlignment.start,
             isScrollable: true,
             labelColor: Colors.white,
             indicatorColor: Theme.of(context).primaryColor,
             tabs: const [
+              Tab(text: "Live"),
+              Tab(text: "Scorecard"),
               Tab(
                 text: "Info",
               ),
-              Tab(text: "Live"),
-              Tab(text: "Scorecard"),
               Tab(text: "Squads"),
               Tab(text: "Highlights"),
             ],
@@ -68,13 +69,13 @@ class MatchDetailsScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            InfoScreen(matchModel: match),
             LiveMatchScreen(
               match: match,
             ),
             ScoreboardScreen(
               matchModel: match,
             ),
+            InfoScreen(matchModel: match),
             TeamSquadsScreen(matchModel: match),
             CommentaryScreen(
               matchModel: match,

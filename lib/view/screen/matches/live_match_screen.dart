@@ -37,9 +37,19 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
   }
 
   Future<void> loadData() async {
-    await Get.find<AllMatchesController>().getMatchOdds(
-        token: Get.find<AuthController>().entityToken,
-        matchId: widget.match.matchId!);
+    await Get.find<AllMatchesController>()
+        .getMatchOdds(
+            token: Get.find<AuthController>().entityToken,
+            matchId: widget.match.matchId!)
+        .then((value) {
+      if (Get.find<AllMatchesController>().matchOddsModel != null) {
+        if (Get.find<AllMatchesController>().matchOddsModel!.sessionOdds !=
+            null) {
+          checkSession(
+              Get.find<AllMatchesController>().matchOddsModel!.sessionOdds!);
+        }
+      }
+    });
     await Get.find<AllMatchesController>()
         .getMatchDetails(
             token: Get.find<AuthController>().entityToken,
@@ -49,6 +59,19 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
         if (Get.find<AllMatchesController>().matchInfoModel!.scorecard !=
             null) {
           if (Get.find<AllMatchesController>().matchInfoModel!.live != null) {
+            if (Get.find<AllMatchesController>()
+                    .matchInfoModel!
+                    .live!
+                    .liveScore !=
+                null) {
+              calculateTotalBalls(Get.find<AllMatchesController>()
+                      .matchInfoModel!
+                      .live!
+                      .liveScore!
+                      .overs ??
+                  0.0);
+            }
+
             if (Get.find<AllMatchesController>()
                     .matchInfoModel!
                     .live!
@@ -678,6 +701,14 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                   const SizedBox(
                                     height: Dimensions.paddingSizeDefault,
                                   ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox(),
+                      matchesController.matchInfoModel != null
+                          ? Expanded(
+                              child: ListView(
+                                children: [
                                   Container(
                                     padding: EdgeInsets.all(
                                         Dimensions.paddingSizeDefault),
@@ -774,14 +805,6 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            )
-                          : const SizedBox(),
-                      matchesController.matchInfoModel != null
-                          ? Expanded(
-                              child: ListView(
-                                children: [
                                   const SizedBox(
                                     height: Dimensions.paddingSizeDefault,
                                   ),
@@ -1091,10 +1114,6 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                 ],
                                               ),
                                             ),
-                                            Divider(
-                                              color: Colors.grey[300],
-                                              thickness: 1,
-                                            ),
                                             const SizedBox(
                                               height:
                                                   Dimensions.paddingSizeDefault,
@@ -1123,108 +1142,6 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                   ]),
                                               child: Column(
                                                 children: [
-                                                  /*
-                                                  authController
-                                                              .winningPredictionModel !=
-                                                          null
-                                                      ? widget.match.status == 3
-                                                          ? SizedBox(
-                                                              child: Row(
-                                                                children: [
-                                                                  Expanded(
-                                                                    child: Text(
-                                                                      "Winning Predictions",
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              Dimensions.fontSizeLarge),
-                                                                    ),
-                                                                  ),
-                                                                  Container(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            6),
-                                                                    decoration: BoxDecoration(
-                                                                        color: Colors
-                                                                            .green,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6)),
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        Text(
-                                                                          widget.match.teama!.shortName ??
-                                                                              "",
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: Dimensions.fontSizeLarge),
-                                                                        ),
-                                                                        Text(
-                                                                          authController
-                                                                              .winningPredictionModel!
-                                                                              .teamAWinningProbability!
-                                                                              .round()
-                                                                              .toString(),
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: Dimensions.fontSizeLarge),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    width: Dimensions
-                                                                        .paddingSizeDefault,
-                                                                  ),
-                                                                  Container(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            6),
-                                                                    decoration: BoxDecoration(
-                                                                        color: Colors
-                                                                            .green,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6)),
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        Text(
-                                                                          widget.match.teamb!.shortName ??
-                                                                              "",
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: Dimensions.fontSizeLarge),
-                                                                        ),
-                                                                        Text(
-                                                                          authController
-                                                                              .winningPredictionModel!
-                                                                              .teamBWinningProbability!
-                                                                              .round()
-                                                                              .toString(),
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: Dimensions.fontSizeLarge),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            )
-                                                          : const SizedBox()
-                                                      : const SizedBox(),
-                                                  const Divider(
-                                                    color: Colors.grey,
-                                                  ),*/
                                                   matchesController
                                                               .matchInfoModel !=
                                                           null
@@ -1299,9 +1216,19 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                               : const SizedBox()
                                                           : const SizedBox()
                                                       : const SizedBox(),
-                                                  const Divider(
-                                                    color: Colors.grey,
-                                                  ),
+                                                  matchesController
+                                                              .matchOddsModel !=
+                                                          null
+                                                      ? matchesController
+                                                                  .matchOddsModel!
+                                                                  .liveOdds !=
+                                                              null
+                                                          ? Divider(
+                                                              color:
+                                                                  Colors.grey,
+                                                            )
+                                                          : SizedBox()
+                                                      : SizedBox(),
                                                   matchesController
                                                               .matchOddsModel !=
                                                           null
@@ -1391,80 +1318,258 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                                                             )
                                                           : const SizedBox()
                                                       : const SizedBox(),
-                                                  const Divider(
-                                                    color: Colors.grey,
-                                                  ),
                                                   matchesController
                                                               .matchOddsModel !=
                                                           null
-                                                      ? widget.match.status == 3
-                                                          ? matchesController
+                                                      ? matchesController
                                                                   .matchOddsModel!
-                                                                  .sessionOdds!
-                                                                  .isNotEmpty
+                                                                  .liveOdds !=
+                                                              null
+                                                          ? Divider(
+                                                              color:
+                                                                  Colors.grey,
+                                                            )
+                                                          : SizedBox()
+                                                      : SizedBox(),
+                                                  matchesController
+                                                              .matchInfoModel!
+                                                              .live !=
+                                                          null
+                                                      ? matchesController
+                                                                  .matchInfoModel!
+                                                                  .live!
+                                                                  .liveInningNumber ==
+                                                              1
+                                                          ? widget.match.competition!
+                                                                          .gameFormat ==
+                                                                      "t20" ||
+                                                                  widget
+                                                                          .match
+                                                                          .competition!
+                                                                          .gameFormat ==
+                                                                      "odi"
                                                               ? SizedBox(
-                                                                  child: ListView
-                                                                      .builder(
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          itemCount: matchesController
-                                                                              .matchOddsModel!
-                                                                              .sessionOdds!
-                                                                              .length,
-                                                                          physics:
-                                                                              const NeverScrollableScrollPhysics(),
-                                                                          itemBuilder:
-                                                                              (context, index) {
-                                                                            return matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("6 over run bhav") || matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("10 over run bhav") || matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("15 over run bhav") || matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("18 over run bhav") || matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("19 over run bhav") || matchesController.matchOddsModel!.sessionOdds![index].title!.startsWith("20 over run bhav")
-                                                                                ? Column(
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        child: Row(
-                                                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                          children: [
-                                                                                            Text(
-                                                                                              matchesController.matchOddsModel!.sessionOdds![index].title.toString(),
-                                                                                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
-                                                                                            ),
-                                                                                            SizedBox(
-                                                                                              child: Row(
-                                                                                                children: [
-                                                                                                  Container(
-                                                                                                    padding: const EdgeInsets.all(6),
-                                                                                                    decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(6)),
-                                                                                                    child: Text(
-                                                                                                      matchesController.matchOddsModel!.sessionOdds![index].layCondition.toString(),
-                                                                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                  const SizedBox(
-                                                                                                    width: 10,
-                                                                                                  ),
-                                                                                                  Container(
-                                                                                                    padding: const EdgeInsets.all(6),
-                                                                                                    decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(6)),
-                                                                                                    child: Text(
-                                                                                                      matchesController.matchOddsModel!.sessionOdds![index].backCondition.toString(),
-                                                                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: Dimensions.fontSizeLarge),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ],
-                                                                                              ),
-                                                                                            )
-                                                                                          ],
-                                                                                        ),
-                                                                                      ),
-                                                                                      const Divider(
-                                                                                        color: Colors.grey,
-                                                                                      ),
-                                                                                    ],
-                                                                                  )
-                                                                                : const SizedBox();
-                                                                          }),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Text(
+                                                                        "Predicted Score",
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.black,
+                                                                            fontWeight: FontWeight.bold,
+                                                                            fontSize: Dimensions.fontSizeLarge),
+                                                                      ),
+                                                                      const Spacer(),
+                                                                      Container(
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            6),
+                                                                        decoration: BoxDecoration(
+                                                                            color:
+                                                                                Colors.green,
+                                                                            borderRadius: BorderRadius.circular(6)),
+                                                                        child:
+                                                                            Text(
+                                                                          widget.match.competition!.gameFormat == "t20"
+                                                                              ? (int.parse(matchesController.matchInfoModel!.live!.liveScore!.runrate!.round().toString()) * 20).toString()
+                                                                              : (int.parse(matchesController.matchInfoModel!.live!.liveScore!.runrate!.round().toString()) * 50).toString(),
+                                                                          style: TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: Dimensions.fontSizeLarge),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 )
                                                               : const SizedBox()
-                                                          : const SizedBox()
-                                                      : const SizedBox(),
+                                                          : SizedBox()
+                                                      : SizedBox(),
+                                                  matchesController
+                                                              .matchInfoModel!
+                                                              .live !=
+                                                          null
+                                                      ? matchesController
+                                                                  .matchInfoModel!
+                                                                  .live!
+                                                                  .liveInningNumber ==
+                                                              1
+                                                          ? Divider(
+                                                              color:
+                                                                  Colors.grey,
+                                                            )
+                                                          : SizedBox()
+                                                      : SizedBox(),
+                                                  newSession != null
+                                                      ? widget.match.status == 3
+                                                          ? SizedBox(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    "Runs × Balls",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            Dimensions.fontSizeLarge),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Container(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              6),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Colors.green,
+                                                                              borderRadius: BorderRadius.circular(6)),
+                                                                          child:
+                                                                              Text(
+                                                                            (int.parse(newSession!.layCondition!) - matchesController.matchInfoModel!.live!.liveScore!.runs!).toString(),
+                                                                            style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: Dimensions.fontSizeLarge),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
+                                                                        Container(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              6),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Colors.red,
+                                                                              borderRadius: BorderRadius.circular(6)),
+                                                                          child:
+                                                                              Text(
+                                                                            (calculateTotalBalls(matchesController.matchInfoModel!.live!.liveScore!.overs!) -
+                                                                                        (newSession!.title!.startsWith("6")
+                                                                                            ? calculateSessionTotalBalls(6.0)
+                                                                                            : newSession!.title!.startsWith("10")
+                                                                                                ? calculateSessionTotalBalls(10.0)
+                                                                                                : newSession!.title!.startsWith("15")
+                                                                                                    ? calculateSessionTotalBalls(15.0)
+                                                                                                    : calculateSessionTotalBalls(20.0)))
+                                                                                    .toString()
+                                                                                    .startsWith("-")
+                                                                                ? (calculateTotalBalls(matchesController.matchInfoModel!.live!.liveScore!.overs!) -
+                                                                                        (newSession!.title!.startsWith("6")
+                                                                                            ? calculateSessionTotalBalls(6.0)
+                                                                                            : newSession!.title!.startsWith("10")
+                                                                                                ? calculateSessionTotalBalls(10.0)
+                                                                                                : newSession!.title!.startsWith("15")
+                                                                                                    ? calculateSessionTotalBalls(15.0)
+                                                                                                    : calculateSessionTotalBalls(20.0)))
+                                                                                    .toString()
+                                                                                    .replaceAll("-", "")
+                                                                                : (calculateTotalBalls(matchesController.matchInfoModel!.live!.liveScore!.overs!) -
+                                                                                        (newSession!.title!.startsWith("6")
+                                                                                            ? calculateSessionTotalBalls(6.0)
+                                                                                            : newSession!.title!.startsWith("10")
+                                                                                                ? calculateSessionTotalBalls(10.0)
+                                                                                                : newSession!.title!.startsWith("15")
+                                                                                                    ? calculateSessionTotalBalls(15.0)
+                                                                                                    : calculateSessionTotalBalls(20.0)))
+                                                                                    .toString(),
+                                                                            style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: Dimensions.fontSizeLarge),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            )
+                                                          : SizedBox()
+                                                      : SizedBox(),
+                                                  newSession != null
+                                                      ? Divider(
+                                                          color: Colors.grey,
+                                                        )
+                                                      : SizedBox(),
+                                                  newSession != null
+                                                      ? widget.match.status == 3
+                                                          ? SizedBox(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    newSession!
+                                                                        .title
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            Dimensions.fontSizeLarge),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Container(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              6),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Colors.green,
+                                                                              borderRadius: BorderRadius.circular(6)),
+                                                                          child:
+                                                                              Text(
+                                                                            newSession!.layCondition.toString(),
+                                                                            style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: Dimensions.fontSizeLarge),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
+                                                                        Container(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              6),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Colors.red,
+                                                                              borderRadius: BorderRadius.circular(6)),
+                                                                          child:
+                                                                              Text(
+                                                                            newSession!.backCondition.toString(),
+                                                                            style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: Dimensions.fontSizeLarge),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            )
+                                                          : SizedBox()
+                                                      : SizedBox(),
                                                 ],
                                               ),
                                             )
@@ -1618,7 +1723,31 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
             }));
   }
 
+  SessionOdd? newSession;
+
+  void checkSession(List<SessionOdd> session) {
+    for (var i in session) {
+      if (i.title!.startsWith("6 over run bhav")) {
+        newSession = i;
+      } else if (i.title!.startsWith("10 over run bhav")) {
+        newSession = i;
+      } else if (i.title!.startsWith("15 over run bhav")) {
+        newSession = i;
+      } else if (i.title!.startsWith("20 over run bhav")) {
+        newSession = i;
+      }
+    }
+  }
+
   int calculateTotalBalls(double overs) {
+    int completeOvers = overs.toInt(); // Get the integer part of overs
+    double remainingBalls = (overs - completeOvers) *
+        10; // Get the fractional part and convert it to balls
+
+    return (completeOvers * 6) + remainingBalls.toInt();
+  }
+
+  int calculateSessionTotalBalls(double overs) {
     int completeOvers = overs.toInt(); // Get the integer part of overs
     double remainingBalls = (overs - completeOvers) *
         10; // Get the fractional part and convert it to balls
