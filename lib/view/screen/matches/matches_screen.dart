@@ -30,20 +30,17 @@ class MatchesScreen extends StatelessWidget {
             ),
             bottom: TabBar(
               labelColor: Colors.white,
-              indicatorColor: Theme
-                  .of(context)
-                  .primaryColor,
+              indicatorColor: Theme.of(context).primaryColor,
               tabs: const [
                 Tab(text: "Live"),
                 Tab(text: "Upcoming"),
-                Tab(text: "Recent"),
+                Tab(text: "Completed"),
               ],
             ),
           ),
           backgroundColor: Get.theme.scaffoldBackgroundColor,
           body: const TabBarView(
             children: [
-
               LiveMatchesListScreen(),
               UpcomingMatchScreen(),
               CompletedMatchScreen(),

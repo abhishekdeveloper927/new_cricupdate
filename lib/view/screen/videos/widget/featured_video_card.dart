@@ -3,6 +3,7 @@ import 'package:cricupdate/view/screen/videos/video_details_screen.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -46,14 +47,16 @@ class _FeaturedVideoCardState extends State<FeaturedVideoCard> {
         Get.to(() => VideoDetailsScreen(videoModel: widget.videoModel));
       },
       child: Container(
-        width: Get.width - 70,
+        width: Get.width - 110,
         decoration: BoxDecoration(
             color: Colors.grey[300]!,
+            boxShadow: [BoxShadow(color: Colors.grey[300]!, blurRadius: 3)],
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault)),
         margin: const EdgeInsets.only(
-          bottom: 16,
+          right: 16,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
                 decoration: BoxDecoration(
@@ -64,15 +67,19 @@ class _FeaturedVideoCardState extends State<FeaturedVideoCard> {
                   children: [
                     Opacity(
                       opacity: 0.8,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(Dimensions.radiusDefault),
-                            topRight:
-                                Radius.circular(Dimensions.radiusDefault)),
-                        child: Image.network(
-                          widget.videoModel.horizontalPoster ?? "",
-                          height: 180,
-                          fit: BoxFit.cover,
+                      child: Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topLeft:
+                                  Radius.circular(Dimensions.radiusDefault),
+                              topRight:
+                                  Radius.circular(Dimensions.radiusDefault)),
+                          child: Image.network(
+                            widget.videoModel.horizontalPoster ?? "",
+                            height: 150,
+                            width: Get.width,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -92,14 +99,41 @@ class _FeaturedVideoCardState extends State<FeaturedVideoCard> {
             Container(
               padding: const EdgeInsets.symmetric(
                   horizontal: Dimensions.paddingSizeDefault, vertical: 4),
-              child: Text(
-                widget.videoModel.title ?? "",
-                style: TextStyle(
-                    color: Colors.black, fontSize: Dimensions.fontSizeDefault),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.videoModel.title! +
+                            "hjfjhdfhjghd dhfhjdfhhjd jfhdjfje jdjsbdjsdbsdbsj jdjs" ??
+                        "",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: Dimensions.fontSizeDefault),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        DateFormat("yyyy-MMMM-dd")
+                            .add_jm()
+                            .format(widget.videoModel.createdAt!),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: Dimensions.fontSizeExtraSmall),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.end,
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),

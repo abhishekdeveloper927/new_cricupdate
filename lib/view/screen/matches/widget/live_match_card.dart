@@ -64,7 +64,7 @@ class _LiveMatchCardState extends State<LiveMatchCard> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
                   decoration: BoxDecoration(
-                      color: Color(0xff373535),
+                      color: const Color(0xff708600),
                       borderRadius:
                           BorderRadius.circular(Dimensions.radiusSmall)),
                   child: Text(

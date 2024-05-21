@@ -500,12 +500,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         newsController.selectedHome == 0
                             ? Container(
-                                padding: EdgeInsets.all(
-                                    Dimensions.paddingSizeDefault),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Dimensions.paddingSizeDefault),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(() => const CompetitionScreen());
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Trending Series",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                    Dimensions.fontSizeLarge),
+                                          ),
+                                          const Icon(
+                                            Icons.arrow_forward_ios_outlined,
+                                            color: Colors.black,
+                                            size: 18,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
                                       height: Dimensions.paddingSizeDefault,
                                     ),
                                     newsController.bannerList.isNotEmpty
@@ -565,32 +588,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Dimensions.fontSizeLarge),
                                             ),
                                           ),
-                                    const SizedBox(
-                                      height: Dimensions.paddingSizeDefault,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(() => const CompetitionScreen());
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Featured Tournament",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize:
-                                                    Dimensions.fontSizeLarge),
-                                          ),
-                                          const Icon(
-                                            Icons.arrow_forward_ios_outlined,
-                                            color: Colors.black,
-                                            size: 18,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
                                     const SizedBox(
                                       height: Dimensions.paddingSizeDefault,
                                     ),
@@ -745,7 +742,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     videosController
                                             .featuredVideoList.isNotEmpty
                                         ? SizedBox(
-                                            height: 250,
+                                            height: 230,
                                             child: ListView.builder(
                                                 itemCount: videosController
                                                     .featuredVideoList.length,
@@ -778,7 +775,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Top News",
+                                          "Top Cricket Stories",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize:
@@ -815,126 +812,254 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     : newsController
                                                         .newsList.length,
                                             itemBuilder: (context, index) {
-                                              return InkWell(
-                                                onTap: () {
-                                                  Get.to(() =>
-                                                      NewsDetailsScreen(
-                                                          newsModel:
-                                                              newsController
-                                                                      .newsList[
-                                                                  index]));
-                                                },
-                                                child: Container(
-                                                  margin: EdgeInsets.only(
-                                                      bottom: Dimensions
-                                                          .paddingSizeDefault),
-                                                  decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            color: Colors
-                                                                .grey[300]!,
-                                                            blurRadius: 3)
-                                                      ],
-                                                      color: Colors.white,
-                                                      borderRadius: BorderRadius
-                                                          .circular(Dimensions
-                                                              .radiusDefault)),
-                                                  child: Row(
-                                                    children: [
-                                                      ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .only(
-                                                            topLeft:
-                                                                Radius.circular(
+                                              return index == 0
+                                                  ? InkWell(
+                                                      onTap: () {
+                                                        Get.to(() => NewsDetailsScreen(
+                                                            newsModel:
+                                                                newsController
+                                                                        .newsList[
+                                                                    index]));
+                                                      },
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            bottom: Dimensions
+                                                                .paddingSizeDefault),
+                                                        decoration: BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      300]!,
+                                                                  blurRadius: 3)
+                                                            ],
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
                                                                     Dimensions
-                                                                        .radiusDefault),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    Dimensions
-                                                                        .radiusDefault),
-                                                          ),
-                                                          child: Image.network(
-                                                            newsController
-                                                                .newsList[index]
-                                                                .images![0],
-                                                            errorBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    Object
-                                                                        object,
-                                                                    StackTrace?
-                                                                        tree) {
-                                                              return ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          Dimensions
-                                                                              .radiusDefault),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg',
-                                                                    width: Get
-                                                                        .width,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ));
-                                                            },
-                                                            fit: BoxFit.cover,
-                                                            height: 100,
-                                                            width: 150,
-                                                          )),
-                                                      SizedBox(
-                                                        width: 6,
-                                                      ),
-                                                      Expanded(
+                                                                        .radiusDefault)),
                                                         child: Column(
                                                           children: [
-                                                            Text(
-                                                              newsController
-                                                                          .newsList[
-                                                                              index]
-                                                                          .title! +
-                                                                      " bbhh dfjdjfhd dfjdhjfd dfjhdjn kfdjkfndjf nfndm" ??
-                                                                  "",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      Dimensions
-                                                                          .fontSizeDefault,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
+                                                            ClipRRect(
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          Dimensions
+                                                                              .radiusDefault),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          Dimensions
+                                                                              .radiusDefault),
+                                                                ),
+                                                                child: Image
+                                                                    .network(
+                                                                  newsController
+                                                                      .newsList[
+                                                                          index]
+                                                                      .images![0],
+                                                                  errorBuilder: (BuildContext
+                                                                          context,
+                                                                      Object
+                                                                          object,
+                                                                      StackTrace?
+                                                                          tree) {
+                                                                    return ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(Dimensions
+                                                                                .radiusDefault),
+                                                                        child: Image
+                                                                            .network(
+                                                                          'https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg',
+                                                                          width:
+                                                                              Get.width,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ));
+                                                                  },
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  height: 150,
+                                                                  width:
+                                                                      Get.width,
+                                                                )),
+                                                            SizedBox(
+                                                              height: 8,
                                                             ),
-                                                            const SizedBox(
-                                                              height: Dimensions
-                                                                  .paddingSizeExtraSmall,
-                                                            ),
-                                                            Text(
-                                                              "${newsController.newsList[index].description!} bbhh dfjdjfhd dfjdhjfd dfjhdjn kfdjkfndjf nfndm" ??
-                                                                  "",
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: Dimensions
-                                                                    .fontSizeSmall,
+                                                            Container(
+                                                              padding: EdgeInsets
+                                                                  .all(Dimensions
+                                                                      .paddingSizeDefault),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    newsController.newsList[index].title! +
+                                                                            " bbhh dfjdjfhd dfjdhjfd dfjhdjn kfdjkfndjf nfndm" ??
+                                                                        "",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            Dimensions
+                                                                                .fontSizeDefault,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    height: Dimensions
+                                                                        .paddingSizeExtraSmall,
+                                                                  ),
+                                                                  Text(
+                                                                    "${newsController.newsList[index].description!} bbhh dfjdjfhd dfjdhjfd dfjhdjn kfdjkfndjf nfndm" ??
+                                                                        "",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeSmall,
+                                                                    ),
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  ),
+                                                                ],
                                                               ),
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
                                                             ),
                                                           ],
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
+                                                    )
+                                                  : InkWell(
+                                                      onTap: () {
+                                                        Get.to(() => NewsDetailsScreen(
+                                                            newsModel:
+                                                                newsController
+                                                                        .newsList[
+                                                                    index]));
+                                                      },
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            bottom: Dimensions
+                                                                .paddingSizeDefault),
+                                                        decoration: BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      300]!,
+                                                                  blurRadius: 3)
+                                                            ],
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    Dimensions
+                                                                        .radiusDefault)),
+                                                        child: Row(
+                                                          children: [
+                                                            ClipRRect(
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          Dimensions
+                                                                              .radiusDefault),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          Dimensions
+                                                                              .radiusDefault),
+                                                                ),
+                                                                child: Image
+                                                                    .network(
+                                                                  newsController
+                                                                      .newsList[
+                                                                          index]
+                                                                      .images![0],
+                                                                  errorBuilder: (BuildContext
+                                                                          context,
+                                                                      Object
+                                                                          object,
+                                                                      StackTrace?
+                                                                          tree) {
+                                                                    return ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(Dimensions
+                                                                                .radiusDefault),
+                                                                        child: Image
+                                                                            .network(
+                                                                          'https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg',
+                                                                          width:
+                                                                              Get.width,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ));
+                                                                  },
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  height: 100,
+                                                                  width: 150,
+                                                                )),
+                                                            SizedBox(
+                                                              width: 6,
+                                                            ),
+                                                            Expanded(
+                                                              child: Column(
+                                                                children: [
+                                                                  Text(
+                                                                    newsController.newsList[index].title! +
+                                                                            " bbhh dfjdjfhd dfjdhjfd dfjhdjn kfdjkfndjf nfndm" ??
+                                                                        "",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            Dimensions
+                                                                                .fontSizeDefault,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    height: Dimensions
+                                                                        .paddingSizeExtraSmall,
+                                                                  ),
+                                                                  Text(
+                                                                    "${newsController.newsList[index].description!} bbhh dfjdjfhd dfjdhjfd dfjhdjn kfdjkfndjf nfndm" ??
+                                                                        "",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .fontSizeSmall,
+                                                                    ),
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
                                             })
                                         : Center(
                                             child: Text(

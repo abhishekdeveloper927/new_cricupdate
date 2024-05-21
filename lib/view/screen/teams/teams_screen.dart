@@ -133,11 +133,6 @@ class _TeamsScreenState extends State<TeamsScreen> {
                                         fontSize: Dimensions.fontSizeDefault,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  trailing: const Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    size: 18,
-                                    color: Colors.black,
-                                  ),
                                 ),
                               ),
                             );

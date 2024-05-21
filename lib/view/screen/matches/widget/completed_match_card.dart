@@ -45,19 +45,6 @@ class _CompletedMatchCardState extends State<CompletedMatchCard> {
                   ),
                 ),
                 SizedBox(
-                  width: Dimensions.paddingSizeDefault,
-                ),
-                Expanded(
-                  child: Text(
-                    widget.matchModel.subtitle ?? "",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: Dimensions.fontSizeDefault,
-                    ),
-                    maxLines: 1,
-                  ),
-                ),
-                SizedBox(
                   width: 4,
                 ),
                 Container(

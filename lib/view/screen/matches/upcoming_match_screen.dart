@@ -66,7 +66,7 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 50,
+                  height: 40,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -81,8 +81,9 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                         child: Container(
                           margin: const EdgeInsets.only(
                               right: Dimensions.paddingSizeDefault),
-                          padding: const EdgeInsets.all(
-                              Dimensions.paddingSizeDefault),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.paddingSizeDefault,
+                          ),
                           decoration: BoxDecoration(
                               color: matchesController.selectedMatchFormat == 0
                                   ? Get.theme.primaryColor
@@ -115,8 +116,9 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                         child: Container(
                           margin: const EdgeInsets.only(
                               right: Dimensions.paddingSizeDefault),
-                          padding: const EdgeInsets.all(
-                              Dimensions.paddingSizeDefault),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.paddingSizeDefault,
+                          ),
                           decoration: BoxDecoration(
                               color: matchesController.selectedMatchFormat == 1
                                   ? Get.theme.primaryColor
@@ -148,8 +150,9 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                         child: Container(
                           margin: const EdgeInsets.only(
                               right: Dimensions.paddingSizeDefault),
-                          padding: const EdgeInsets.all(
-                              Dimensions.paddingSizeDefault),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.paddingSizeDefault,
+                          ),
                           decoration: BoxDecoration(
                               color: matchesController.selectedMatchFormat == 2
                                   ? Get.theme.primaryColor
@@ -182,8 +185,9 @@ class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
                         child: Container(
                           margin: const EdgeInsets.only(
                               right: Dimensions.paddingSizeDefault),
-                          padding: const EdgeInsets.all(
-                              Dimensions.paddingSizeDefault),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.paddingSizeDefault,
+                          ),
                           decoration: BoxDecoration(
                               color: matchesController.selectedMatchFormat == 3
                                   ? Get.theme.primaryColor

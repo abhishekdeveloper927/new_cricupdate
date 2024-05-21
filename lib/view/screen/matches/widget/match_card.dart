@@ -54,7 +54,10 @@ class _MatchCardState extends State<MatchCard> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: Dimensions.paddingSizeDefault, vertical: 8),
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Color(0xffE8a33a),
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey[300]!, blurRadius: 3)
+                      ],
                       borderRadius:
                           BorderRadius.circular(Dimensions.radiusSmall)),
                   child: Text(
@@ -167,14 +170,20 @@ class _MatchCardState extends State<MatchCard> {
             const SizedBox(
               height: Dimensions.paddingSizeDefault,
             ),
-            Text(
-              DateFormat("yyyy-MMMM-dd")
-                  .add_jm()
-                  .format(widget.matchModel.dateStart!),
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Dimensions.fontSizeLarge),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  DateFormat("yyyy-MMMM-dd")
+                      .add_jm()
+                      .format(widget.matchModel.dateStart!),
+                  style: TextStyle(
+                      color: Color(0xff820000),
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.fontSizeLarge),
+                  textAlign: TextAlign.end,
+                ),
+              ],
             ),
             const SizedBox(
               height: 6,
